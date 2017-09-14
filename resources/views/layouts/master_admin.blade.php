@@ -312,8 +312,8 @@
                         <span class="menu-arrow arrow_carrot-right"></span>
                     </a>
                     <ul class="sub">
-                        {{--<li><a class="" href="{{route('users.index')}}">All users</a></li>--}}
-                        <li><a class="" href="form_validation.html">Form Validation</a></li>
+                        <li><a class="" href="{{route('users.index')}}">All users</a></li>
+
                     </ul>
                 </li>
                 <li class="sub-menu">
