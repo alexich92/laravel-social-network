@@ -324,7 +324,7 @@
                     </a>
                     <ul class="sub">
                         {{--<li><a class="" href="{{route('posts.index')}}">All Posts</a></li>--}}
-                        {{--<li><a class="" href="{{route('posts.create')}}">Create a post</a></li>--}}
+                        <li><a class="" href="{{route('posts.create')}}">Create a post</a></li>
                         <li><a class="" href="grids.html">Grids</a></li>
                     </ul>
                 </li>
