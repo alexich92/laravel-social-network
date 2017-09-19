@@ -9,6 +9,7 @@ class Post extends Model
     protected $fillable=['user_id','slug','title','image'];
 
 
+    //a post belongs to an user
     public function user()
     {
         return $this->belongsTo('App\User');
@@ -22,5 +23,11 @@ class Post extends Model
         $count = Post::whereRaw("slug RLIKE '^{$slug}(-[0-9]+)?$'")->count();
 
         return $count ? "{$slug}-{$count}" : $slug;
+    }
+
+    //a post belongs to many sections
+    public function sections()
+    {
+        return $this->belongsToMany('App\Section');
     }
 }

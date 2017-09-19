@@ -337,10 +337,10 @@
                     {{--</a>--}}
                 </li>
                 <li>
-                    {{--<a class="" href="{{route('sections.index')}}">--}}
-                        {{--<i class="icon_genius"></i>--}}
-                        {{--<span>Sections</span>--}}
-                    {{--</a>--}}
+                    <a class="" href="{{route('sections.index')}}">
+                        <i class="icon_genius"></i>
+                        <span>Sections</span>
+                    </a>
                 </li>
                 <li>
                     <a class="" href="chart-chartjs.html">

@@ -23,4 +23,5 @@ Route::prefix('admin')->middleware('admin')->group(function () {
     });
     Route::get('users', 'AdminUsersController@index')->name('users.index');
     Route::resource('posts','AdminPostsController');
+    Route::resource('sections','AdminSectionsController');
 });
