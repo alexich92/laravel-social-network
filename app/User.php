@@ -24,11 +24,20 @@ class User extends Authenticatable
      * @var array
      */
     protected $hidden = [
-        'password', 'remember_token',
+        'password', 'remember_token','isAdmin'
     ];
 
     public function posts()
     {
         return $this->hasMany('App\Post');
     }
+
+    public function isAdmin()
+    {
+        if($this->isAdmin){
+            return true;
+        }
+            return false;
+    }
+
 }

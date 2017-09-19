@@ -17,7 +17,7 @@
                     <th>Email</th>
                     <th>Registered</th>
                     <th>Last Update</th>
-                    {{--<th>Role</th>--}}
+                    <th>Role</th>
                 </tr>
                 </thead>
                 <tbody>
@@ -29,11 +29,11 @@
                         <td>{{$user->email}}</td>
                         <td>{{$user->created_at->diffForHumans()}}</td>
                         <td>{{$user->updated_at->diffForHumans()}}</td>
-                        {{--@if($user->isadmin)--}}
-                            {{--<td><span class="label label-danger">Admin</span></td>--}}
-                        {{--@else--}}
-                            {{--<td><span class="label label-success">User</span></td>--}}
-                        {{--@endif--}}
+                        @if($user->isAdmin)
+                            <td><span class="label label-danger">Admin</span></td>
+                        @else
+                            <td><span class="label label-success">User</span></td>
+                        @endif
                     </tr>
                 @endforeach
                 </tbody>

@@ -11,15 +11,16 @@
 |
 */
 
-Route::get('/admin', function () {
-    return view('layouts.master_admin');
-});
+
 
 Auth::routes();
 
 Route::get('/', 'HomeController@index')->name('home');
 
-Route::prefix('admin')->group(function () {
+Route::prefix('admin')->middleware('admin')->group(function () {
+    Route::get('/', function () {
+        return view('layouts.master_admin');
+    });
     Route::get('users', 'AdminUsersController@index')->name('users.index');
     Route::resource('posts','AdminPostsController');
 });
