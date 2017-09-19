@@ -14,6 +14,8 @@
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
     <!-- Fonts -->
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.css" rel="stylesheet" />
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/noty@3.1.2/lib/noty.css">
+
 </head>
 <body style="overflow-x: hidden;">
     @include('partials.nav')
@@ -23,5 +25,17 @@
 
     <!-- Scripts -->
     <script src="{{ asset('js/app.js') }}"></script>
+    <script src="https://cdn.jsdelivr.net/npm/noty@3.1.2/lib/noty.min.js"></script>
+    <script>
+        @if(Session::has('success'))
+            new Noty({
+                type:'success',
+                layout:'bottomRight',
+                timeout:3000,
+                text:'{{Session::get('success')}}'
+            }).show();
+        @endif
+    </script>
+
 </body>
 </html>

@@ -15,6 +15,7 @@
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
     {{--<!-- bootstrap theme -->--}}
     <link href="{{asset('css/bootstrap-theme.css')}}" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/noty@3.1.2/lib/noty.css">
     <!--external css-->
     <!-- font icon -->
     <link href="{{asset('css/elegant-icons-style.css')}}" rel="stylesheet" />
@@ -23,6 +24,7 @@
     <!-- Custom styles -->
     <link href="{{asset('css/style.css')}}" rel="stylesheet">
     <link href="{{asset('css/style-responsive.css')}}" rel="stylesheet" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css">
     @yield('css')
 
 </head>
@@ -404,10 +406,30 @@
 <!-- javascripts -->
 
 <script src="{{ asset('js/app.js') }}"></script>
+<script src="https://cdn.jsdelivr.net/npm/noty@3.1.2/lib/noty.min.js"></script>
 <!-- nice scroll -->
 <script src="{{asset('js/jquery.scrollTo.min.js')}}"></script>
 <script src="{{asset('js/jquery.nicescroll.js')}}" type="text/javascript"></script><!--custome script for all page-->
 <script src="{{asset('js/scripts.js')}}"></script>
+{{--<script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>--}}
+{{--<script>--}}
+    {{--toastr.options.newestOnTop = false;--}}
+{{--</script>--}}
+{{--<script>--}}
+    {{--@if(Session::has('success'))--}}
+        {{--toastr.success("{{Session::get('success')}}");--}}
+    {{--@endif--}}
+{{--</script>--}}
+<script>
+    @if(Session::has('success'))
+       new Noty({
+            type:'success',
+            layout:'bottomRight',
+            timeout:3000,
+            text:'{{Session::get('success')}}'
+    }).show();
+    @endif
+</script>
 
 
 @yield('js')

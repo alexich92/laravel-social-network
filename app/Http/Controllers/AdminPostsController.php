@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Post;
+use Session;
 
 class AdminPostsController extends Controller
 {
@@ -37,6 +38,7 @@ class AdminPostsController extends Controller
         //make a unique slug from title
         $input['slug'] =Post::makeSlugFromTitle(request()->title);
         auth()->user()->posts()->create($input);
+        Session::flash('success','Post created!');
 
         return back();
 
