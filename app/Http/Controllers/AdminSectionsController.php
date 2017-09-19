@@ -83,6 +83,8 @@ class AdminSectionsController extends Controller
      */
     public function destroy($id)
     {
-        //
+        Section::destroy($id);
+        Session::flash('success','Section deleted');
+        return redirect()->back();
     }
 }
