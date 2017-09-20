@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Post;
 use Session;
+use App\Section;
 
 class AdminPostsController extends Controller
 {
@@ -15,15 +16,15 @@ class AdminPostsController extends Controller
 
     public function create()
     {
-        return view('admin.posts.create');
+        return view('admin.posts.create')->with('sections',Section::all());
     }
 
     public function store()
     {
-        //validate the request
         request()->validate([
             'title'=>'required',
-            'image'=>'required|mimes:jpeg,bmp,png,gif'
+            'image'=>'required|mimes:jpeg,bmp,png,gif',
+            'sections'=>'required'
         ]);
 
         $input = request()->all();
@@ -37,7 +38,11 @@ class AdminPostsController extends Controller
         }
         //make a unique slug from title
         $input['slug'] =Post::makeSlugFromTitle(request()->title);
-        auth()->user()->posts()->create($input);
+        //create the post
+        $post = auth()->user()->posts()->create($input);
+        //attach the sections
+        $post->sections()->attach(request()->sections);
+
         Session::flash('success','Post created!');
 
         return back();

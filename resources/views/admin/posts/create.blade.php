@@ -19,6 +19,21 @@
                     @endif
                 </div>
 
+                <div class="form-group{{ $errors->has('sections') ? ' has-error' : '' }} ">
+                    <label for="sections" class="control-label">Select Section</label>
+                    @foreach($sections as $section)
+                        <div class="checkbox">
+                            <label><input type="checkbox" name="sections[]" value="{{$section->id}}">{{$section->name}}</label>
+                        </div>
+                    @endforeach
+                    @if ($errors->has('sections'))
+                        <span class="help-block">
+                                <strong>{{ $errors->first('sections') }}</strong>
+                            </span>
+                    @endif
+                </div>
+
+
                 <div class="form-group{{ $errors->has('image') ? ' has-error' : '' }}">
                     <label for="image" class="control-label">Post image</label>
                     <input  type="file" class="form-control" name="image" value="{{ old('image') }}" required autofocus>
