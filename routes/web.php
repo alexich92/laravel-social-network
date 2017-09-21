@@ -25,3 +25,9 @@ Route::prefix('admin')->middleware('admin')->group(function () {
     Route::resource('posts','AdminPostsController');
     Route::resource('sections','AdminSectionsController');
 });
+
+Route::prefix('settings')->middleware('auth')->group(function () {
+    Route::get('/account','UserSettingsController@showAccountView')->name('user.account');
+    Route::patch('/account','UserSettingsController@updateAccount')->name('user.updateAccount');
+
+});
