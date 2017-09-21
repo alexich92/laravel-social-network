@@ -9,10 +9,10 @@ use App\Section;
 
 class AdminPostsController extends Controller
 {
-//    public function index()
-//    {
-//        return view('admin.posts.create');
-//    }
+    public function index()
+    {
+        return view('admin.posts.index')->with('posts',Post::latest()->paginate(20));
+    }
 
     public function create()
     {
@@ -46,6 +46,17 @@ class AdminPostsController extends Controller
         Session::flash('success','Post created!');
 
         return back();
+
+    }
+
+    public function destroy($id)
+    {
+        $post=Post::find($id);
+        unlink(public_path('/images/posts/' . $post->image));
+       // $post->sections()->detach($id);
+        $post->delete();
+        Session::flash('success','Post deleted!');
+        return redirect()->back();
 
     }
 

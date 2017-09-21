@@ -8,6 +8,15 @@ class Post extends Model
 {
     protected $fillable=['user_id','slug','title','image'];
 
+    public static function boot()
+    {
+        parent::boot();
+        static::deleting(function($post){
+            $post->sections()->detach();
+        });
+
+    }
+
 
     //a post belongs to an user
     public function user()
