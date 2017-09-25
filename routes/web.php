@@ -29,5 +29,7 @@ Route::prefix('admin')->middleware('admin')->group(function () {
 Route::prefix('settings')->middleware('auth')->group(function () {
     Route::get('/account','UserSettingsController@showAccountView')->name('user.account');
     Route::patch('/account','UserSettingsController@updateAccount')->name('user.updateAccount');
+    Route::get('/password','UserSettingsController@showPasswordView')->name('user.password');
+    Route::patch('/password','UserSettingsController@updatePassword')->name('user.updatePassword');
 
 });
