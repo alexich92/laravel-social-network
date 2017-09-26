@@ -36,6 +36,7 @@
             }).show();
         @endif
     </script>
+    @yield('js')
 
 </body>
 </html>

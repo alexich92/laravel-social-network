@@ -34,7 +34,9 @@ Route::prefix('settings')->middleware('auth')->group(function () {
 
 });
 
-//Route::middleware('auth')->group(function () {
-//    Route::get('/u/{user}','UserSettingsController@showPasswordView')->name('user.profile');
-//});
+Route::middleware('auth')->group(function () {
+    //Route::get('/u/{user}','UserSettingsController@showPasswordView')->name('user.profile');
+    Route::get('/member/delete/','UserSettingsController@showDeleteUserView')->name('member.delete');
+    Route::delete('/member/delete/{id}','UserSettingsController@destroy')->name('user.destroy');
+});
 

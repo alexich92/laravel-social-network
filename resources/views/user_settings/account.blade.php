@@ -59,9 +59,9 @@
 
             </div>
 
-            {{--<div class="col-xs-6" style="margin-left:-13px; margin-top:40px; ">--}}
-                {{--<a class="" href="{{route('member.delete')}}" style="text-decoration:none; color: deepskyblue">Delete my account</a>--}}
-            {{--</div>--}}
+            <div class="col-xs-6" style="margin-left:-13px; margin-top:40px; ">
+                <a class="" href="{{route('member.delete')}}" style="text-decoration:none; color: deepskyblue">Delete my account</a>
+            </div>
 
 
         </div>

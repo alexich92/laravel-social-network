@@ -5,6 +5,7 @@ use App\Http\Requests\UpdatePasswordRequest;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Session;
 use Illuminate\Validation\Rule;
+use App\User;
 
 class UserSettingsController extends Controller
 {
@@ -36,5 +37,29 @@ class UserSettingsController extends Controller
         auth()->user()->update(['password' => Hash::make($request->input('new_password'))]);
         Session::flash('success','Your password has been updated');
         return back();
+    }
+
+    public function showDeleteUserView()
+    {
+        return view('user_settings.delete_user');
+    }
+
+    public function destroy($id)
+    {
+       request()->validate([
+           'password'=>'required'
+       ]);
+
+        if(Hash::check(request()->password,auth()->user()->password))
+        {
+            User::destroy($id);
+            Session::flash('success','We will miss you. Your account has been deleted!');
+            return redirect()->route('home');
+
+        }
+//        Session::flash('success','Incorect password');
+        return  back()->withErrors(['password' => ['Your password is incorrect']]);
+
+
     }
 }
