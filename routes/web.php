@@ -33,3 +33,8 @@ Route::prefix('settings')->middleware('auth')->group(function () {
     Route::patch('/password','UserSettingsController@updatePassword')->name('user.updatePassword');
 
 });
+
+//Route::middleware('auth')->group(function () {
+//    Route::get('/u/{user}','UserSettingsController@showPasswordView')->name('user.profile');
+//});
+

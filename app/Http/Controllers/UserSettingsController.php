@@ -16,7 +16,8 @@ class UserSettingsController extends Controller
     public function updateAccount()
     {
        $validatedData =  request()->validate([
-            'email' =>['required','email',Rule::unique('users')->ignore(auth()->id())]
+            'email' =>['required','email',Rule::unique('users')->ignore(auth()->id())],
+            'username'=>['required','min:3',Rule::unique('users')->ignore(auth()->id())]
         ]);
 
         auth()->user()->update($validatedData);

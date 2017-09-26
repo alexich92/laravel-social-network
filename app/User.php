@@ -15,7 +15,7 @@ class User extends Authenticatable
      * @var array
      */
     protected $fillable = [
-        'name', 'email', 'password',
+        'name', 'email', 'password','username'
     ];
 
     /**
@@ -32,12 +32,20 @@ class User extends Authenticatable
         return $this->hasMany('App\Post');
     }
 
+
+    //check to see if the user is an admin
     public function isAdmin()
     {
         if($this->isAdmin){
             return true;
         }
             return false;
+    }
+    //generate unique username
+    static public function getUsername($name) {
+        $username = str_slug($name);
+        $count  = User::whereRaw("username REGEXP '^{$username}(-[0-9]*)?$'")->count();
+        return $count ? "{$username}{$count}" : $username;
     }
 
 }

@@ -10,17 +10,17 @@
                 {{csrf_field()}}
                 {{method_field('PATCH')}}
 
-            {{--<div class="form-group has-feedback {{ $errors->has('username') ? 'has-error' : '' }}">--}}
-                {{--<label for="username">Username</label>--}}
-                {{--<input id="username" type="text" class="form-control" name="username">--}}
-                {{--<span class="glyphicon glyphicon-user form-control-feedback"></span>--}}
-                {{--@if ($errors->has('username'))--}}
-                    {{--<span class="help-block">--}}
-                            {{--<strong>{{ $errors->first('username') }}</strong>--}}
-                        {{--</span>--}}
-                {{--@endif--}}
-                {{--<p class="settParagraphs" style="margin-top: 2px; color: lightslategrey">http://9gag.dev/u/{{$user->username}}</p>--}}
-            {{--</div>--}}
+            <div class="form-group has-feedback {{ $errors->has('username') ? 'has-error' : '' }}">
+                <label for="username">Username</label>
+                <input id="username" type="text" class="form-control" name="username" value="{{Auth::user()->username}}">
+                <span class="glyphicon glyphicon-user form-control-feedback"></span>
+                @if ($errors->has('username'))
+                    <span class="help-block">
+                            <strong>{{ $errors->first('username') }}</strong>
+                        </span>
+                @endif
+                {{--<p class="settParagraphs" style="margin-top: 2px; color: lightslategrey">{{route('user.profile',['username'=>Auth::user()->username])}}</p>--}}
+            </div>
 
             <div class="form-group has-feedback {{ $errors->has('email') ? 'has-error' : '' }}">
                 <label for="email">Email</label>
