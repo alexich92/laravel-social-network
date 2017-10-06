@@ -31,6 +31,8 @@ Route::prefix('settings')->middleware('auth')->group(function () {
     Route::patch('/account','UserSettingsController@updateAccount')->name('user.updateAccount');
     Route::get('/password','UserSettingsController@showPasswordView')->name('user.password');
     Route::patch('/password','UserSettingsController@updatePassword')->name('user.updatePassword');
+    Route::get('/profile','UserSettingsController@showProfileView')->name('user.profile');
+    Route::patch('/profile','UserSettingsController@updateProfile')->name('user.updateProfile');
 
 });
 

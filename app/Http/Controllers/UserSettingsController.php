@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 use App\Http\Requests\UpdatePasswordRequest;
+use App\Http\Requests\UpdateProfileRequest;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Session;
 use Illuminate\Validation\Rule;
@@ -39,6 +41,34 @@ class UserSettingsController extends Controller
         return back();
     }
 
+    public function showProfileView()
+    {
+        return view('user_settings.profile');
+    }
+
+    public function updateProfile(UpdateProfileRequest $request){
+//       $input =  $this->validate([
+//            'avatar'=>'mimes:jpeg,bmp,png',
+//            'birthday'=>'nullable|date',
+//            'gender'=>'bool',
+//            'name'=>'required|min:3',
+//            'description'=>'max:255'
+//        ]);
+        $input = $request->all();
+
+        if($file  = request()->file('avatar'))
+        {
+            $filename = time().$file->getClientOriginalName();
+            $file->move('images/avatars',$filename);
+            $input['avatar'] = $filename;
+        }
+
+        auth()->user()->update($input);
+        Session::flash('success','Profile updated!');
+        return redirect()->back();
+    }
+
+
     public function showDeleteUserView()
     {
         return view('user_settings.delete_user');
@@ -57,7 +87,7 @@ class UserSettingsController extends Controller
             return redirect()->route('home');
 
         }
-//        Session::flash('success','Incorect password');
+
         return  back()->withErrors(['password' => ['Your password is incorrect']]);
 
 
