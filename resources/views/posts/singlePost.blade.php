@@ -57,20 +57,20 @@
         <!-- Blog Comments -->
 
         <!-- Comments Form -->
-        {{--@if(Auth::check())--}}
-            {{--<div class="well">--}}
-                {{--<h4>Leave a Comment:</h4>--}}
-                {{--{!! Form::open(['route'=>['comments.store',$post->id],'method'=>'Post']) !!}--}}
-                {{--<input type="hidden" name="post_id" value="{{$post->id}}">--}}
-                {{--<div class="form-group">--}}
-                    {{--{!! Form::textarea('body',null,['class'=>'form-control noresize','rows'=>3,'placeholder'=>'Write comments...']) !!}--}}
-                {{--</div>--}}
-                {{--<button type="submit" class="btn btn-primary ">Submit</button>--}}
-                {{--{!! Form::close() !!}--}}
-            {{--</div>--}}
-        {{--@else--}}
-            {{--<h3 class="text-center">You need to <a href="{{route('login')}}">Log in</a> or <a href="{{route('register')}}">Sign up</a> to leave a comment.</h3>--}}
-        {{--@endif--}}
+        @if(Auth::check())
+            <div class="well">
+                <h4>Leave a Comment:</h4>
+                {!! Form::open(['route'=>['comment.store',$post->id],'method'=>'Post']) !!}
+                <input type="hidden" name="post_id" value="{{$post->id}}">
+                <div class="form-group">
+                    {!! Form::textarea('body',null,['class'=>'form-control noresize','rows'=>3,'placeholder'=>'Write comments...']) !!}
+                </div>
+                <button type="submit" class="btn btn-primary ">Submit</button>
+                {!! Form::close() !!}
+            </div>
+        @else
+            <h3 class="text-center">You need to <a href="{{route('login')}}">Log in</a> or <a href="{{route('register')}}">Sign up</a> to leave a comment.</h3>
+        @endif
 
         <hr>
 

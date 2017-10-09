@@ -47,13 +47,6 @@ class UserSettingsController extends Controller
     }
 
     public function updateProfile(UpdateProfileRequest $request){
-//       $input =  $this->validate([
-//            'avatar'=>'mimes:jpeg,bmp,png',
-//            'birthday'=>'nullable|date',
-//            'gender'=>'bool',
-//            'name'=>'required|min:3',
-//            'description'=>'max:255'
-//        ]);
         $input = $request->all();
 
         if($file  = request()->file('avatar'))

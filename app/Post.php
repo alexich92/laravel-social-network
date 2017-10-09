@@ -39,4 +39,10 @@ class Post extends Model
     {
         return $this->belongsToMany('App\Section');
     }
+
+    //a post have many comments
+    public function comments()
+    {
+        return $this->hasMany('App\Comment');
+    }
 }
