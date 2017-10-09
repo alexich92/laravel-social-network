@@ -331,10 +331,10 @@
                     </ul>
                 </li>
                 <li>
-                    {{--<a class="" href="{{route('comments.index')}}">--}}
-                        {{--<i class="icon_genius"></i>--}}
-                        {{--<span>Comments</span>--}}
-                    {{--</a>--}}
+                    <a class="" href="{{route('comments.index')}}">
+                        <i class="icon_genius"></i>
+                        <span>Comments</span>
+                    </a>
                 </li>
                 <li>
                     <a class="" href="{{route('sections.index')}}">

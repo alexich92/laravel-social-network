@@ -25,6 +25,8 @@ Route::prefix('admin')->middleware('admin')->group(function () {
     Route::get('users', 'AdminUsersController@index')->name('users.index');
     Route::resource('posts','AdminPostsController');
     Route::resource('sections','AdminSectionsController');
+    Route::get('comments','PostCommentsController@index')->name('comments.index');
+    Route::delete('comments/{id}','PostCommentsController@destroy')->name('comments.destroy');
 });
 
 Route::prefix('settings')->middleware('auth')->group(function () {
