@@ -65,7 +65,7 @@
                 <a href="#" class="pull-right">Report</a>
             @else
                 <a  class="pull-right" href="javascript:void(0);" onclick="$(this).find('form').submit();">Delete
-                    <form action="{{route('post.delete',['id'=>$post->id])}}" method="post">
+                    <form class="delete" action="{{route('post.delete',['id'=>$post->id])}}" method="post">
                         {{csrf_field()}}
                         {{method_field('DELETE')}}
                     </form>
@@ -202,6 +202,12 @@
 @endsection
 
 @section('js')
+    <script>
+        $(".delete").on("submit", function(){
+            return confirm("Are you sure you want to delete this post?");
+        });
+    </script>
+
     <script>
         $(".toggle-replay").click(function(){
             $('.comment-replay').hide()

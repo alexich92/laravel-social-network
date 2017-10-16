@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Post;
+use Session;
 use App\Comment;
 
 class PostsController extends Controller
@@ -81,6 +82,10 @@ class PostsController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $post=Post::find($id);
+        unlink(public_path('images/posts/' . $post->image));
+        $post->delete();
+        Session::flash('success','Post deleted!');
+        return redirect()->route('home');
     }
 }
