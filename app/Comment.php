@@ -12,4 +12,10 @@ class Comment extends Model
     {
         return $this->belongsTo('App\Post');
     }
+
+    //a comment may have many replies
+    public function replies()
+    {
+        return $this->hasMany('App\CommentReply');
+    }
 }

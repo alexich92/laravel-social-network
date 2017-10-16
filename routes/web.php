@@ -44,5 +44,7 @@ Route::middleware('auth')->group(function () {
     Route::get('/member/delete/','UserSettingsController@showDeleteUserView')->name('member.delete');
     Route::delete('/member/delete/{id}','UserSettingsController@destroy')->name('user.destroy');
     Route::post('/post/{post_id}/comment' ,'PostCommentsController@store')->name('comment.store');
+    Route::post('comment/reply','CommentRepliesController@createReply');
+    Route::get('/post/delete/{id}', 'PostsController@destroy')->name('post.delete');
 });
 
