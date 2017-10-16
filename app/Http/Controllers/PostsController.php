@@ -74,6 +74,12 @@ class PostsController extends Controller
         //
     }
 
+    public function search_posts()
+    {
+        $posts = Post::where('title','like','%' . request('query') . '%')->get();
+        return view('search_results')->with('posts',$posts);
+    }
+
     /**
      * Remove the specified resource from storage.
      *

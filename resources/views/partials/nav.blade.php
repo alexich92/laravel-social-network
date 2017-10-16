@@ -17,6 +17,7 @@
         </div>
 
         <div class="collapse navbar-collapse" id="app-navbar-collapse">
+
             <!-- Left Side Of Navbar -->
             <ul class="nav navbar-nav">
                 &nbsp;@if(Auth::check() && Auth::user()->isAdmin)
@@ -26,6 +27,16 @@
 
             <!-- Right Side Of Navbar -->
             <ul class="nav navbar-nav navbar-right">
+                <li>
+                    <form  action="/search" method="get" class="navbar-form">
+                        <div class="input-group">
+                            <input type="text" class="form-control" placeholder="search" name="query">
+                            <div class="input-group-btn">
+                                <button class="btn btn-default" type="submit"><i class="glyphicon glyphicon-search"></i></button>
+                            </div>
+                        </div>
+                    </form>
+                </li>
                 <!-- Authentication Links -->
                 @guest
                     <li><a href="{{ route('login') }}">Login</a></li>

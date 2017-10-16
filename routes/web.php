@@ -17,6 +17,7 @@ Auth::routes();
 
 Route::get('/', 'HomeController@index')->name('home');
 Route::get('/post/{slug}', 'PostsController@show')->name('post.single');
+Route::get('/search','PostsController@search_posts')->name('post.search');
 
 Route::prefix('admin')->middleware('admin')->group(function () {
     Route::get('/', function () {
