@@ -11,7 +11,6 @@
                     <th>Post</th>
                     <th>Body</th>
                     <th>Created</th>
-                    <th>Updated</th>
                     <th>Replies</th>
                     <th>Delete</th>
                 </tr>
@@ -21,11 +20,9 @@
                     <tr>
                         <td>{{$comment->id}}</td>
                         <td>{{$comment->author}}</td>
-                        <td><a href="{{route('post.single',['slug' => $comment->post->slug])}}"><img src="/images/posts/{{$comment->post->image}}" alt="view post"  height="50" width="70"></a></td>
+                        <td><a href="{{route('post.single',['slug'=>$comment->post->slug])}}"><img src="/images/posts/{{$comment->post->photo}}" alt="view post"  height="50" width="70"></a></td>
                         <td>{{$comment->body}}</td>
                         <td>{{$comment->created_at->diffForHumans()}}</td>
-                        <td>{{$comment->updated_at->diffForHumans()}}</td>
-
                         <td>
                             <a href="{{route('comment.replies',['id'=>$comment->id])}}" class="btn btn-xs btn-success">{{count($comment->replies)}}</a>
                         </td>

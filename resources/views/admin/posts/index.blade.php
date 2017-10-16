@@ -14,14 +14,14 @@
             Title
         </th>
         <th>
+            View
+        </th>
+        <th>
+            Comments
+        </th>
+        <th>
             Created
         </th>
-        {{--<th>--}}
-            {{--View--}}
-        {{--</th>--}}
-        {{--<th>--}}
-            {{--Comments--}}
-        {{--</th>--}}
         <th>
             Delete
         </th>
@@ -32,12 +32,12 @@
                 <td>{{$post->id}}</td>
                 <td><img src="/images/posts/{{$post->image}}" alt="{{$post->title}}" width="90px" height="50px"></td>
                 <td>{{$post->title}}</td>
-                {{--<td>--}}
-                    {{--<a href="{{route('post.single',['slug'=>$post->slug])}}" class="btn btn-xs btn-info">View</a>--}}
-                {{--</td>--}}
-                {{--<td>--}}
-                    {{--<a href="{{route('post.comments',['slug'=>$post->slug])}}" class="btn btn-xs btn-success">{{count($post->comments)}}</a>--}}
-                {{--</td>--}}
+                <td>
+                    <a href="{{route('post.single',['slug'=>$post->slug])}}" class="btn btn-xs btn-info">View Post</a>
+                </td>
+                <td>
+                    <a href="{{route('post.comments',['slug'=>$post->slug])}}" class="btn btn-xs btn-success">{{count($post->comments)}}</a>
+                </td>
                 <td>{{$post->created_at->diffForHumans()}}</td>
                 <td>
                     <form action="{{route('posts.destroy',['id'=>$post->id])}}" method="post">

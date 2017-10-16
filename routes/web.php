@@ -27,6 +27,9 @@ Route::prefix('admin')->middleware('admin')->group(function () {
     Route::resource('sections','AdminSectionsController');
     Route::get('comments','PostCommentsController@index')->name('comments.index');
     Route::delete('comments/{id}','PostCommentsController@destroy')->name('comments.destroy');
+    Route::get('post/{slug}/comments','PostCommentsController@show')->name('post.comments');
+    Route::get('post/comment/replies/{id}','CommentRepliesController@showReplies')->name('comment.replies');
+    Route::delete('post/comment/reply/{id}','CommentRepliesController@destroy')->name('replies.destroy');
 });
 
 Route::prefix('settings')->middleware('auth')->group(function () {

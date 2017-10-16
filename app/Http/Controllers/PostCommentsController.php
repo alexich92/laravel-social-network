@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Comment;
 use Session;
+use App\Post;
 
 class PostCommentsController extends Controller
 {
@@ -57,9 +58,11 @@ class PostCommentsController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show($slug)
     {
-        //
+        $post = Post::where('slug',$slug)->first();
+        $comments = $post->comments;
+        return view('admin.comments.show',compact('comments'));
     }
 
     /**
