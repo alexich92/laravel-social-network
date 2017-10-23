@@ -45,4 +45,10 @@ class Post extends Model
     {
         return $this->hasMany('App\Comment');
     }
+
+    //a post have many likes
+    public function likes()
+    {
+        return $this->hasMany('App\Like');
+    }
 }

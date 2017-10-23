@@ -48,4 +48,9 @@ class User extends Authenticatable
         return $count ? "{$username}{$count}" : $username;
     }
 
+    public function likes()
+    {
+        return $this->hasMany('App\Like');
+    }
+
 }

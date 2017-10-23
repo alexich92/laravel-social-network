@@ -50,5 +50,6 @@ Route::middleware('auth')->group(function () {
     Route::post('/post/{post_id}/comment' ,'PostCommentsController@store')->name('comment.store');
     Route::post('comment/reply','CommentRepliesController@createReply');
     Route::delete('/post/delete/{id}', 'PostsController@destroy')->name('post.delete');
+    Route::post('/like','PostsController@likePost')->name('like');
 });
 
