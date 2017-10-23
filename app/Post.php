@@ -13,6 +13,7 @@ class Post extends Model
         parent::boot();
         static::deleting(function($post){
             $post->sections()->detach();
+            $post->likes()->delete();
         });
 
     }

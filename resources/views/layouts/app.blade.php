@@ -20,9 +20,11 @@
 </head>
 <body style="overflow-x: hidden;">
     @include('partials.nav')
-        <div class="container">
+    @yield('header');
+        <div class="container" style="padding-bottom: 300px">
             @yield('content')
         </div>
+
 
     <!-- Scripts -->
     <script src="{{ asset('js/app.js') }}"></script>

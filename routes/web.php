@@ -19,6 +19,11 @@ Route::get('/', 'HomeController@index')->name('home');
 Route::get('/post/{slug}', 'PostsController@show')->name('post.single');
 Route::get('/search','PostsController@search_posts')->name('post.search');
 
+Route::get('/u/{slug}','UserProfileController@showUserOverview')->name('overview');
+Route::get('/u/{slug}/posts','UserProfileController@showUserPosts')->name('posts');
+Route::get('/u/{slug}/likes','UserProfileController@showUserUpvotes')->name('upvotes');
+Route::get('/u/{slug}/comments','UserProfileController@showUserComments')->name('comments');
+
 Route::prefix('admin')->middleware('admin')->group(function () {
     Route::get('/', function () {
         return view('layouts.master_admin');
@@ -51,5 +56,6 @@ Route::middleware('auth')->group(function () {
     Route::post('comment/reply','CommentRepliesController@createReply');
     Route::delete('/post/delete/{id}', 'PostsController@destroy')->name('post.delete');
     Route::post('/like','PostsController@likePost')->name('like');
+
 });
 
