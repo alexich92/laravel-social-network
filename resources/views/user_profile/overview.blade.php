@@ -48,6 +48,8 @@
 
     </div>
 
+    @include('random_posts')
+
 
 @endsection
 
