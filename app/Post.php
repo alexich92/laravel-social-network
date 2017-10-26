@@ -52,4 +52,17 @@ class Post extends Model
     {
         return $this->hasMany('App\Like');
     }
+
+    //return all posts that are liked by the user
+    public function likedByUser()
+    {
+        return $this->likes()->where('user_id', auth()->user()->id)->where('like',1);
+    }
+
+
+    //return all posts that where the user commented
+    public function commentedByUser()
+    {
+        return $this->comments()->where('user_id', auth()->user()->id);
+    }
 }

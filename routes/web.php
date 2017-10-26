@@ -19,7 +19,7 @@ Route::get('/', 'HomeController@index')->name('home');
 Route::get('/post/{slug}', 'PostsController@show')->name('post.single');
 Route::get('/search','PostsController@search_posts')->name('post.search');
 
-Route::get('/u/{slug}','UserProfileController@showUserOverview')->name('overview');
+Route::get('/u/{slug}/overview','UserProfileController@showUserOverview')->name('overview');
 Route::get('/u/{slug}/posts','UserProfileController@showUserPosts')->name('posts');
 Route::get('/u/{slug}/likes','UserProfileController@showUserUpvotes')->name('upvotes');
 Route::get('/u/{slug}/comments','UserProfileController@showUserComments')->name('comments');
