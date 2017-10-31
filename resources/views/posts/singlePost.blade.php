@@ -30,7 +30,7 @@
         <!-- Blog Post Title -->
         <h3><b>{{$post->title}}</b></h3>
 
-        <a href="">{{$post->points}} {{str_plural('point',$post->points)}}</a> &middot
+        <a href="" class="points">{{$post->points}} {{str_plural('point',$post->points)}}</a> &middot
         <a href="#comments">{{count($post->comments)}} comments</a>
 
         <div class="media">

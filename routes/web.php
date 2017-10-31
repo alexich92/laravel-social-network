@@ -58,6 +58,7 @@ Route::middleware('auth')->group(function () {
     Route::delete('/post/delete/{id}', 'PostsController@destroy')->name('post.delete');
     Route::post('/like','PostsController@likePost')->name('like');
     Route::get('/random','UserSettingsController@random_image')->name('random');
+    Route::post('/getpoints','PostsController@getpoints')->name('getpoints');
 
 });
 

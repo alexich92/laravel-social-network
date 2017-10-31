@@ -39,5 +39,24 @@ $('.like').on('click', function (event) {
             }
 
         }
+
+        $.ajax({
+            type:'post',
+            url:"/getpoints",
+            data:{postId: postId},
+            success:function(data){
+                if(data == 1){
+                    $(".points").text(data + ' point')
+                }else{
+                    $(".points").text(data + ' points')
+                }
+
+            }
+
+        });
+
+
+
+
     });
 });

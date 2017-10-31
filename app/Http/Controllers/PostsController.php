@@ -149,6 +149,12 @@ class PostsController extends Controller
         }
         return null;
     }
+    
+    public function getpoints(Request $request)
+    {
+        $post = Post::find($request['postId']);
+        return response()->json($post->points);
+    }
 
     /**
      * Remove the specified resource from storage.
