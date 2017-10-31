@@ -3,7 +3,7 @@
 namespace App\Http\Controllers;
 use App\Http\Requests\UpdatePasswordRequest;
 use App\Http\Requests\UpdateProfileRequest;
-use Illuminate\Http\Request;
+use App\ProfileImage;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Session;
 use Illuminate\Validation\Rule;
@@ -43,7 +43,7 @@ class UserSettingsController extends Controller
 
     public function showProfileView()
     {
-        return view('user_settings.profile');
+        return view('user_settings.profile')->with('profile_images');
     }
 
     public function updateProfile(UpdateProfileRequest $request){
@@ -65,6 +65,12 @@ class UserSettingsController extends Controller
     public function showDeleteUserView()
     {
         return view('user_settings.delete_user');
+    }
+
+    public function random_image()
+    {
+        $random_image = ProfileImage::orderByRaw('RAND()')->pluck('image')->get(1);
+        return response()->json($random_image);
     }
 
     public function destroy($id)

@@ -29,6 +29,7 @@ Route::prefix('admin')->middleware('admin')->group(function () {
         return view('layouts.master_admin');
     });
     Route::get('users', 'AdminUsersController@index')->name('users.index');
+    Route::resource('images','ProfileImageController');
     Route::resource('posts','AdminPostsController');
     Route::resource('sections','AdminSectionsController');
     Route::get('comments','PostCommentsController@index')->name('comments.index');
@@ -56,6 +57,7 @@ Route::middleware('auth')->group(function () {
     Route::post('comment/reply','CommentRepliesController@createReply');
     Route::delete('/post/delete/{id}', 'PostsController@destroy')->name('post.delete');
     Route::post('/like','PostsController@likePost')->name('like');
+    Route::get('/random','UserSettingsController@random_image')->name('random');
 
 });
 

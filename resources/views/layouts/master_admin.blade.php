@@ -342,6 +342,18 @@
                         <span>Sections</span>
                     </a>
                 </li>
+                <li class="sub-menu">
+                    <a href="javascript:;" class="">
+                        <i class="icon_desktop"></i>
+                        <span>Profile Images</span>
+                        <span class="menu-arrow arrow_carrot-right"></span>
+                    </a>
+                    <ul class="sub">
+                        <li><a class="" href="{{route('images.index')}}">All Profile Images</a></li>
+                        <li><a class="" href="{{route('images.create')}}">Upload</a></li>
+                        <li><a class="" href="grids.html">Grids</a></li>
+                    </ul>
+                </li>
                 <li>
                     <a class="" href="chart-chartjs.html">
                         <i class="icon_piechart"></i>
