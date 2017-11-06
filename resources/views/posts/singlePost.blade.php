@@ -24,6 +24,7 @@
 @endsection
 
 @section('content')
+    @include('partials.redirect_to_login_modal')
 
     <!-- Blog Post Content Column -->
     <div class="col-md-8">
@@ -37,6 +38,7 @@
 
 
             <div class="addthis_inline_share_toolbox_498c pull-right" style="margin-top: 34px"></div>
+            @if(Auth::check())
             <div class="media" data-postid="{{$post->id}}">
 
                 <button type="button" class="btn btn-{{Auth::user()->likes()->where('post_id',$post->id)->first() ? Auth::user()->likes()->where('post_id',$post->id)->first()->like == 1 ? 'primary' :'default' :'default'}} btn-sm like">
@@ -46,6 +48,21 @@
                     {{Auth::user()->likes()->where('post_id',$post->id)->first() ? Auth::user()->likes()->where('post_id',$post->id)->first()->like == 0 ? 'You don\'t like this post' :'Dislike' :'Dislike'}}
                 </button>
             </div>
+            @else
+                <div class="media" data-postid="{{$post->id}}">
+
+
+                    <button type="button" class="btn btn-default btn-sm" data-toggle="modal" data-target="#myModal">
+                        Like
+                    </button>
+                    <button type="button"  class="btn btn-default btn-sm" data-toggle="modal" data-target="#myModal">
+                        Dislike
+                    </button>
+                    <a target="_blank" class="btn btn-default btn-sm" href="{{route('post.single',['slug'=>$post->slug])}}#comments">
+                        <span class="glyphicon glyphicon-comment"></span>
+                    </a>
+                </div>
+            @endif
 
             {{--@if($next)--}}
                 {{--<a style="margin-top: -35px" id="nextbutton" href="{{route('post.single',['slug'=>$next->slug])}}" class="next pull-right">Next Post &raquo;</a>--}}

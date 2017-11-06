@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Section;
 use Illuminate\Http\Request;
 
 class HomeController extends Controller
@@ -23,6 +24,6 @@ class HomeController extends Controller
      */
     public function index()
     {
-        return view('index');
+        return view('index')->with('sections',Section::all());
     }
 }

@@ -20,7 +20,7 @@
                 </h2>
                 <div class="gifs">
                     <a id="" target="_blank" href="{{route('post.single',['slug'=>$post->slug])}}">
-                        <img style="margin-bottom: 15px; border: 1px solid #c0c0c0; width: 650px" class="img-responsive"  src="/images/posts/{{$post->image}}" alt="">
+                        <img style="margin-bottom: 15px; border: 1px solid #c0c0c0; width: 650px"  class="img-responsive" data-playon="hover"  src="/images/posts/{{$post->image}}" alt="">
                     </a>
                 </div>
 

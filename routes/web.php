@@ -24,6 +24,7 @@ Route::get('/u/{slug}/posts','UserProfileController@showUserPosts')->name('posts
 Route::get('/u/{slug}/likes','UserProfileController@showUserUpvotes')->name('upvotes');
 Route::get('/u/{slug}/comments','UserProfileController@showUserComments')->name('comments');
 
+
 Route::prefix('admin')->middleware('admin')->group(function () {
     Route::get('/', function () {
         return view('layouts.master_admin');
@@ -61,4 +62,6 @@ Route::middleware('auth')->group(function () {
     Route::post('/getpoints','PostsController@getpoints')->name('getpoints');
 
 });
+
+Route::get('/{section_slug}','AdminSectionsController@showSectionPosts')->name('section.posts');
 

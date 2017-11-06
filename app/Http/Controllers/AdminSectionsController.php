@@ -18,6 +18,14 @@ class AdminSectionsController extends Controller
         return view('admin.sections.index')->with('sections',Section::all());
     }
 
+
+    public function showSectionPosts($section_slug)
+    {
+        $section = Section::where('slug',$section_slug)->first();
+        return view('section_posts')->with('section',$section);
+
+    }
+
     /**
      * Show the form for creating a new resource.
      *
@@ -33,9 +41,12 @@ class AdminSectionsController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function store()
+    public function store(Request $request)
     {
-        request()->validate(['name'=>'required|unique:sections']);
+        $this->validate($request,[
+            'name'=>'required|unique:sections',
+            'slug'=>str_slug($request->name)
+        ]);
         Section::create(request()->all());
         Session::flash('success','Section created!');
         return back();

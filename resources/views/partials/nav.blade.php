@@ -20,6 +20,9 @@
 
             <!-- Left Side Of Navbar -->
             <ul class="nav navbar-nav">
+                @foreach($sections as $section)
+                    <li class=""><a href="{{route('section.posts',['slug'=>$section->slug])}}">{{$section->name}}</a></li>
+                @endforeach
                 &nbsp;@if(Auth::check() && Auth::user()->isAdmin)
                     <li><a href="/admin">Admin</a></li>
                  @endif

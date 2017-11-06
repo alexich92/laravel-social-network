@@ -6,11 +6,11 @@ use Illuminate\Database\Eloquent\Model;
 
 class Section extends Model
 {
-    protected $fillable = ['name'];
+    protected $fillable = ['name','slug'];
 
     //a section has many posts
     public function posts()
     {
-        return $this->hasMany('App\Post');
+        return $this->belongsToMany('App\Post');
     }
 }
