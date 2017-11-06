@@ -50,7 +50,12 @@ class PostsController extends Controller
      */
     public function show($slug)
     {
-        return view('posts.singlePost')->with('post',Post::where('slug',$slug)->first());
+        $post = Post::where('slug',$slug)->first();
+        if(!$post){
+            abort(404);
+        }
+        return view('posts.singlePost')->with('post',$post);
+
     }
 
     /**

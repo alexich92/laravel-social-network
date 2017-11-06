@@ -15,12 +15,12 @@
     <!-- Fonts -->
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.css" rel="stylesheet" />
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/noty@3.1.2/lib/noty.css">
-    @yield('css');
+    @yield('css')
 
 </head>
 <body style="overflow-x: hidden;">
     @include('partials.nav')
-    @yield('header');
+    @yield('header')
         <div class="container" style="padding-bottom: 300px">
             @yield('content')
         </div>

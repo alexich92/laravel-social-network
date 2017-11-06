@@ -22,6 +22,9 @@ class AdminSectionsController extends Controller
     public function showSectionPosts($section_slug)
     {
         $section = Section::where('slug',$section_slug)->first();
+        if(!$section){
+            abort(404);
+        }
         return view('section_posts')->with('section',$section);
 
     }
