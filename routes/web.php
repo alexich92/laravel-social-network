@@ -60,7 +60,8 @@ Route::middleware('auth')->group(function () {
     Route::post('/like','PostsController@likePost')->name('like');
     Route::get('/random','UserSettingsController@random_image')->name('random');
     Route::post('/getpoints','PostsController@getpoints')->name('getpoints');
-
+    Route::post('/report','AdminReportsController@getReport');
+    Route::post('/post/reports','PostReportsController@store')->name('reports.store');
 });
 
 Route::get('/{section_slug}','AdminSectionsController@showSectionPosts')->name('section.posts');

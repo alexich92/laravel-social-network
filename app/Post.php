@@ -65,4 +65,9 @@ class Post extends Model
     {
         return $this->comments()->where('user_id', auth()->user()->id);
     }
+    //a post can have many reports
+    public function reports()
+    {
+        return $this->hasMany('App\PostReports');
+    }
 }

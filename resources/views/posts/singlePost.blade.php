@@ -25,6 +25,7 @@
 
 @section('content')
     @include('partials.redirect_to_login_modal')
+    @include('partials.reports_modal')
 
     <!-- Blog Post Content Column -->
     <div class="col-md-8">
@@ -39,7 +40,7 @@
 
             <div class="addthis_inline_share_toolbox_498c pull-right" style="margin-top: 34px"></div>
             @if(Auth::check())
-            <div class="media" data-postid="{{$post->id}}">
+            <div class="media" id="post_id" data-postid="{{$post->id}}">
 
                 <button type="button" class="btn btn-{{Auth::user()->likes()->where('post_id',$post->id)->first() ? Auth::user()->likes()->where('post_id',$post->id)->first()->like == 1 ? 'primary' :'default' :'default'}} btn-sm like">
                     {{Auth::user()->likes()->where('post_id',$post->id)->first() ? Auth::user()->likes()->where('post_id',$post->id)->first()->like == 1 ? 'You like this post' :'Like' :'Like'}}
@@ -79,7 +80,7 @@
         <hr>
         <div class="media">
             @if(Auth::id() !== $post->user_id)
-                <a href="#" class="pull-right">Report</a>
+                <a href="javascript:void(0)" data-toggle="modal" data-target="{{!Auth::check() ? '#myModal' : '#reportsModal'}}" class="pull-right">Report</a>
             @else
                 <a  class="pull-right" href="javascript:void(0);" onclick="$(this).find('form').submit();">Delete
                     <form class="delete" action="{{route('post.delete',['id'=>$post->id])}}" method="post">
@@ -219,17 +220,107 @@
 @endsection
 
 @section('js')
+    <!--Confirm if the user want to delete his post -->
     <script>
         $(".delete").on("submit", function(){
             return confirm("Are you sure you want to delete this post?");
         });
     </script>
 
+    <!-- Show post reply textarea -->
     <script>
         $(".toggle-replay").click(function(){
             $('.comment-replay').hide()
             $(this).next().slideToggle("fast");
         });
+    </script>
+
+    <!-- Remove any selected report when modal is close or dismissed -->
+    <script>
+        $("#reportsModal").on("hidden.bs.modal", function(){
+            $('.picker > li > a > .badge-report-selector').removeClass('selected');
+            $('#next').addClass('disabled');
+            $('.picker').removeClass('hidden');
+            $('.try').addClass('hidden');
+
+        });
+    </script>
+
+    <script>
+        $("#reportsModal").on("show.bs.modal", function(){
+            $('#close').removeClass('hidden');
+            $('#next').removeClass('hidden');
+            $('#prev').addClass('hidden');
+            $('#report').addClass('hidden');
+
+        });
+    </script>
+
+    <!-- Select the report -->
+    <script>
+        $('.picker li a').click(function(){
+            $('.picker > li > a > .badge-report-selector').removeClass('selected');
+            $(this).parent().children().children().addClass('selected');
+            $('#next').removeClass('disabled');
+            var reportId = $(this).attr("data-report-id");
+
+            $.ajaxSetup({
+                headers: {
+                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                }
+            });
+
+            $('#next').click(function(){
+                $('#close').addClass('hidden');
+                $('#next').addClass('hidden');
+                $('#prev').removeClass('hidden');
+                $('#report').removeClass('hidden');
+                $('.picker').addClass('hidden');
+
+                $.ajax({
+                    type:'post',
+                    url:"/report",
+                    dataType: "json",
+                    data:{reportId: reportId}
+                }).done(function(data){
+                    $('.try').removeClass('hidden');
+                    $('.question').html(data[0].question);
+                    $('#affirmation').html(data[0].affirmation);
+                    $('.actions').html(data[0].actions);
+                    $('.footer').text('If you report someone\'s post, 9GAG doesn\'t tell them who reported it.')
+                });
+
+                $('#prev').click(function(){
+                    $("#reportsModal").modal("show");
+                    $('.picker').removeClass('hidden');
+                    $('.try').addClass('hidden');
+                })
+
+
+            });
+            $("#report").click(function(){
+                var postId = $('#post_id').data().postid;
+                $.post({
+                    type:'post',
+                    url:"/post/reports",
+                    data:{reportId: reportId,postId :postId},
+                    success:function(){
+                        $('#reportsModal').modal('hide');
+                        new Noty({
+                            type:'success',
+                            layout:'bottomRight',
+                            timeout:3000,
+                            text:'Report sent!'
+                        }).show();
+
+                    }
+                });
+
+
+            });
+
+        });
+
     </script>
 
     <script src="{{asset('js/like.js')}}"></script>

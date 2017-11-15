@@ -2,6 +2,7 @@
 
 namespace App\Providers;
 
+use App\Report;
 use Illuminate\Support\ServiceProvider;
 use App\Section;
 class AppServiceProvider extends ServiceProvider
@@ -14,6 +15,7 @@ class AppServiceProvider extends ServiceProvider
     public function boot()
     {
         view()->share('sections',Section::all());
+        view()->share('reports',Report::all());
     }
 
     /**
