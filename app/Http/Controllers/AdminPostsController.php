@@ -53,10 +53,9 @@ class AdminPostsController extends Controller
     {
         $post=Post::find($id);
         unlink(public_path('/images/posts/' . $post->image));
-       // $post->sections()->detach($id);
         $post->delete();
         Session::flash('success','Post deleted!');
-        return redirect()->back();
+        return redirect()->route('posts.index');
 
     }
 

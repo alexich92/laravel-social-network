@@ -15,7 +15,7 @@ class PostReportsController extends Controller
      */
     public function index()
     {
-        //
+        return view('admin.reports.index')->with('reports',PostReports::latest()->paginate(20));
     }
 
     /**
@@ -53,9 +53,11 @@ class PostReportsController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show($slug)
     {
-        //
+        $post = Post::where('slug',$slug)->first();
+        $reports = $post->reports;
+        return view('admin.reports.show',compact('reports'));
     }
 
     /**

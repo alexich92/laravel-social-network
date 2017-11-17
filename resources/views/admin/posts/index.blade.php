@@ -1,4 +1,13 @@
 @extends('layouts.master_admin')
+@section('css')
+    <style>
+        .fa-exclamation{
+            color:red;
+        }
+
+    </style>
+
+@endsection
 
 @section('content')
 
@@ -20,6 +29,9 @@
             Comments
         </th>
         <th>
+            Reports
+        </th>
+        <th>
             Created
         </th>
         <th>
@@ -38,6 +50,9 @@
                 <td>
                     <a href="{{route('post.comments',['slug'=>$post->slug])}}" class="btn btn-xs btn-success">{{count($post->comments)}}</a>
                 </td>
+                <th>
+                    <a href="{{route('postReports.show',['slug'=>$post->slug])}}" class="btn btn-xs {{count($post->reports)? 'btn-danger' : 'btn-success'}}">{{count($post->reports)}}</a>
+                </th>
                 <td>{{$post->created_at->diffForHumans()}}</td>
                 <td>
                     <form action="{{route('posts.destroy',['id'=>$post->id])}}" method="post">

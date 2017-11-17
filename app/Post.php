@@ -14,6 +14,7 @@ class Post extends Model
         static::deleting(function($post){
             $post->sections()->detach();
             $post->likes()->delete();
+            $post->reports()->delete();
         });
 
     }

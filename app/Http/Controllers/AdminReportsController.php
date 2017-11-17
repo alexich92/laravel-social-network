@@ -2,7 +2,9 @@
 
 namespace App\Http\Controllers;
 
+use App\PostReports;
 use App\Report;
+use App\Post;
 use Illuminate\Http\Request;
 
 class AdminReportsController extends Controller
@@ -14,7 +16,7 @@ class AdminReportsController extends Controller
      */
     public function index()
     {
-        //
+
     }
 
 
@@ -52,9 +54,10 @@ class AdminReportsController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show($slug)
     {
-        //
+        $post = Post::where('slug',$slug)->first();
+        return view('admin.reports.show',compact('post'));
     }
 
     /**

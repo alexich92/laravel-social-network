@@ -336,12 +336,15 @@
                         <span>Comments</span>
                     </a>
                 </li>
+
                 <li>
-                    <a class="" href="{{route('sections.index')}}">
-                        <i class="icon_genius"></i>
-                        <span>Sections</span>
+                    <a class="" href="{{route('posts.reports')}}">
+                        <i class="fa fa-flag" aria-hidden="true"></i>
+                        <span>Reports</span>
                     </a>
                 </li>
+
+
                 <li class="sub-menu">
                     <a href="javascript:;" class="">
                         <i class="icon_desktop"></i>
@@ -423,15 +426,7 @@
 <script src="{{asset('js/jquery.scrollTo.min.js')}}"></script>
 <script src="{{asset('js/jquery.nicescroll.js')}}" type="text/javascript"></script><!--custome script for all page-->
 <script src="{{asset('js/scripts.js')}}"></script>
-{{--<script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>--}}
-{{--<script>--}}
-    {{--toastr.options.newestOnTop = false;--}}
-{{--</script>--}}
-{{--<script>--}}
-    {{--@if(Session::has('success'))--}}
-        {{--toastr.success("{{Session::get('success')}}");--}}
-    {{--@endif--}}
-{{--</script>--}}
+
 <script>
     @if(Session::has('success'))
        new Noty({

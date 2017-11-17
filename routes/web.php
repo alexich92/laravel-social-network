@@ -29,15 +29,19 @@ Route::prefix('admin')->middleware('admin')->group(function () {
     Route::get('/', function () {
         return view('layouts.master_admin');
     });
+    Route::get('posts/reports','PostReportsController@index')->name('posts.reports');
+    Route::get('post/{slug}/reports','AdminReportsController@show')->name('postReports.show');
     Route::get('users', 'AdminUsersController@index')->name('users.index');
     Route::resource('images','ProfileImageController');
     Route::resource('posts','AdminPostsController');
     Route::resource('sections','AdminSectionsController');
+
     Route::get('comments','PostCommentsController@index')->name('comments.index');
     Route::delete('comments/{id}','PostCommentsController@destroy')->name('comments.destroy');
     Route::get('post/{slug}/comments','PostCommentsController@show')->name('post.comments');
     Route::get('post/comment/replies/{id}','CommentRepliesController@showReplies')->name('comment.replies');
     Route::delete('post/comment/reply/{id}','CommentRepliesController@destroy')->name('replies.destroy');
+
 });
 
 Route::prefix('settings')->middleware('auth')->group(function () {
