@@ -19,7 +19,7 @@ class AdminSectionsController extends Controller
     }
 
 
-    public function showSectionPosts($section_slug)
+    public function showSectionPosts($section_slug ='trending')
     {
         $section = Section::where('slug',$section_slug)->first();
         if(!$section){

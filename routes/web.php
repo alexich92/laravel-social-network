@@ -15,7 +15,8 @@
 
 Auth::routes();
 
-Route::get('/', 'HomeController@index')->name('home');
+//Route::get('/', 'HomeController@index')->name('home');
+Route::get('/','AdminSectionsController@showSectionPosts');
 Route::get('/post/{slug}', 'PostsController@show')->name('post.single');
 Route::get('/search','PostsController@search_posts')->name('post.search');
 
@@ -69,4 +70,5 @@ Route::middleware('auth')->group(function () {
 });
 
 Route::get('/{section_slug}','AdminSectionsController@showSectionPosts')->name('section.posts');
+
 

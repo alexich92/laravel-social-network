@@ -24,6 +24,10 @@ class HomeController extends Controller
      */
     public function index()
     {
-        return view('index')->with('sections',Section::all());
+//        $section = Section::where('slug','trending')->first();
+//        if(!$section){
+//            abort(404);
+//        }
+//        return view('section_posts')->with('section',$section);
     }
 }
