@@ -57,14 +57,14 @@ class Post extends Model
     //return all posts that are liked by the user
     public function likedByUser()
     {
-        return $this->likes()->where('user_id', auth()->user()->id)->where('like',1);
+        return $this->likes()->where('username', request('username'))->where('like',1);
     }
 
 
     //return all posts that where the user commented
     public function commentedByUser()
     {
-        return $this->comments()->where('user_id', auth()->user()->id);
+        return $this->comments()->where('author', request('username'));
     }
     //a post can have many reports
     public function reports()

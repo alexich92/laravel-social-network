@@ -17,7 +17,7 @@ class CommentRepliesController extends Controller
         ]);
         $data = [
             'comment_id' =>$request->comment_id,
-            'author'  =>auth()->user()->name,
+            'author'  =>auth()->user()->username,
             'body'    =>$request->body,
             'image'   =>auth()->user()->avatar
         ];

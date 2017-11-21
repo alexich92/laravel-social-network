@@ -15,7 +15,7 @@
 
 
             @foreach($posts->reverse() as $post)
-                <h5 style="margin-bottom: -20px"><strong>{{$post->user->name}}</strong> commented</h5>
+                <h5 style="margin-bottom: -20px"><strong>{{$user->username}}</strong> commented</h5>
                 <h2>
                     <a target="_blank" href="{{route('post.single',['slug'=>$post->slug])}}" style="text-decoration: none; color: black;font-size: 24px">{{ucfirst($post->title)}}</a>
                 </h2>

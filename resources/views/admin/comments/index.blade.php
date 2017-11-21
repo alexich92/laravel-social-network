@@ -21,7 +21,7 @@
                     <tr>
                         <td>{{$comment->id}}</td>
                         <td>{{$comment->author}}</td>
-                        <td><a href="{{route('post.single',['slug' => $comment->post->slug])}}"><img src="/images/posts/{{$comment->post->image}}" alt="view post"  height="50" width="70"></a></td>
+                        {{--<td><a href="{{route('post.single',['slug' => $comment->post->slug])}}"><img src="/images/posts/{{$comment->post->image}}" alt="view post"  height="50" width="70"></a></td>--}}
                         <td>{{$comment->body}}</td>
                         <td>{{$comment->created_at->diffForHumans()}}</td>
                         <td>{{$comment->updated_at->diffForHumans()}}</td>

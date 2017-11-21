@@ -9,10 +9,10 @@
 
 <div class="navigation-1">
     <ul>
-        <li><a  href="{{route('overview',['slug'=>Auth::user()->name])}}" class="{{ Request::is('*/overview') ? 'active' : '' }}">Overview</a></li>
-        <li><a  href="{{route('posts',['slug'=>Auth::user()->name])}}" class="{{ Request::is('*/posts') ? 'active' : '' }}">Posts</a></li>
-        <li><a  href="{{route('upvotes',['slug'=>Auth::user()->name])}}" class="{{ Request::is('*/likes') ? 'active' : '' }}">Upvotes</a></li>
-        <li><a  href="{{route('comments',['slug'=>Auth::user()->name])}}" class="{{ Request::is('*/comments') ? 'active' : '' }}" >Comments</a></li>
+        <li><a  href="{{route('overview',['username'=>$user->username])}}" class="{{ Request::is('*/overview') ? 'active' : '' }}">Overview</a></li>
+        <li><a  href="{{route('posts',['username'=>$user->username])}}" class="{{ Request::is('*/posts') ? 'active' : '' }}">Posts</a></li>
+        <li><a  href="{{route('upvotes',['username'=>$user->username])}}" class="{{ Request::is('*/likes') ? 'active' : '' }}">Upvotes</a></li>
+        <li><a  href="{{route('comments',['username'=>$user->username])}}" class="{{ Request::is('*/comments') ? 'active' : '' }}" >Comments</a></li>
     </ul>
 </div>
 <hr style="margin-top: -2px">

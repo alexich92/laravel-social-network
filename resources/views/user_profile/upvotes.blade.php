@@ -14,7 +14,7 @@
         @if(count($posts)>0)
 
 
-            @foreach($posts->reverse() as $post)
+            @foreach($posts as $post)
 
                 <h2>
                     <a target="_blank" href="{{route('post.single',['slug'=>$post->slug])}}" style="text-decoration: none; color: black;font-size: 24px">{{ucfirst($post->title)}}</a>

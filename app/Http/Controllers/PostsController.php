@@ -122,6 +122,7 @@ class PostsController extends Controller
             $like = new Like();
         }
         $like->like = $is_like;
+        $like->username = $user->username;
         $like->user_id = $user->id;
         $like->post_id = $post->id;
         if($update){

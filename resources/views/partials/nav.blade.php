@@ -51,7 +51,7 @@
                             </a>
 
                             <ul class="dropdown-menu" role="menu">
-                                <li><a href="{{route('overview',['slug'=>Auth::user()->name])}}">My profile</a></li>
+                                <li><a href="{{route('overview',['username'=>Auth::user()->username])}}">My profile</a></li>
                                 <li><a href="{{route('user.account')}}">Settings</a></li>
                                 <li>
                                     <a href="{{ route('logout') }}"
