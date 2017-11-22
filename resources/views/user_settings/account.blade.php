@@ -6,9 +6,10 @@
     <div class="col-md-5">
         <h2><b>Account</b></h2>
         <div class="box-body">
-            <form action="{{route('user.updateAccount')}}" method="POST">
-                {{csrf_field()}}
-                {{method_field('PATCH')}}
+            {!! Form::model($user,['route'=>['user.updateAccount',$user->id],'method'=>'PATCH']) !!}
+            {{--<form action="{{route('user.updateAccount')}}" method="POST">--}}
+                {{--{{csrf_field()}}--}}
+                {{--{{method_field('PATCH')}}--}}
 
             <div class="form-group has-feedback {{ $errors->has('username') ? 'has-error' : '' }}">
                 <label for="username">Username</label>
@@ -36,14 +37,14 @@
             </div>
 
 
-            {{--<label for="checkbox" style="margin-bottom: 10px">Upvote</label>--}}
-            {{--<div class="form-group">--}}
-                {{--<input type="hidden" name="hide_upvote" value="0" >--}}
-                {{--{{Form::checkbox('hide_upvote')}}--}}
+            <label for="checkbox" style="margin-bottom: 10px">Upvote</label>
+            <div class="form-group">
+                <input type="hidden" name="hide_upvotes" value="0" >
+                {{Form::checkbox('hide_upvotes')}}
 
-                {{--Hide my upvotes in profile--}}
+                Hide my upvotes in profile
 
-            {{--</div>--}}
+            </div>
 
             <div class="form-group">
                 <div class="col-xs-6" style="margin-left: -15px; margin-top: 17px">
@@ -53,8 +54,8 @@
                 </div>
             </div>
 
-            </form>
-
+            {{--</form>--}}
+            {!! Form::close() !!}
             <div class="clearfix">
 
             </div>

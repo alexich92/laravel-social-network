@@ -22,9 +22,10 @@ class CreateUsersTable extends Migration
             $table->string('country')->nullable();
             $table->string('gender')->nullable();
             $table->date('birthday')->nullable();
+            $table->boolean('hide_upvotes')->default(0);
             $table->text('description')->default('My funny collection');
             $table->string('password');
-            $table->string('isAdmin')->default(0);
+            $table->boolean('isAdmin')->default(0);
             $table->rememberToken();
             $table->timestamps();
         });

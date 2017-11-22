@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 use App\Http\Requests\UpdatePasswordRequest;
 use App\Http\Requests\UpdateProfileRequest;
 use App\ProfileImage;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Session;
 use Illuminate\Validation\Rule;
@@ -16,13 +17,13 @@ class UserSettingsController extends Controller
         return view('user_settings.account');
     }
 
-    public function updateAccount()
+    public function updateAccount(Request $r)
     {
        $validatedData =  request()->validate([
             'email' =>['required','email',Rule::unique('users')->ignore(auth()->id())],
-            'username'=>['required','min:3',Rule::unique('users')->ignore(auth()->id())]
+            'username'=>['required','min:3',Rule::unique('users')->ignore(auth()->id())],
+            'hide_upvotes'=>'bool'
         ]);
-
         auth()->user()->update($validatedData);
         Session::flash('success','You updated your account!');
         return back();
