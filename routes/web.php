@@ -16,7 +16,7 @@
 Auth::routes();
 
 //Route::get('/', 'HomeController@index')->name('home');
-Route::get('/','AdminSectionsController@showSectionPosts');
+Route::get('/','AdminSectionsController@showSectionPosts')->name('home');
 Route::get('/post/{slug}', 'PostsController@show')->name('post.single');
 Route::get('/search','PostsController@search_posts')->name('post.search');
 
@@ -68,7 +68,7 @@ Route::middleware('auth')->group(function () {
     Route::post('/report','AdminReportsController@getReport');
     Route::post('/post/reports','PostReportsController@store')->name('reports.store');
 });
-
+Route::post('/user/login','Auth\LoginController@login_modal_users')->name('user.login');
 Route::get('/{section_slug}','AdminSectionsController@showSectionPosts')->name('section.posts');
 
 

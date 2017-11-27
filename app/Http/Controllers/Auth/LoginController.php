@@ -5,6 +5,9 @@ namespace App\Http\Controllers\Auth;
 use App\Http\Controllers\Controller;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
 use Illuminate\Http\Request;
+use Auth;
+use App\User;
+use Session;
 
 class LoginController extends Controller
 {
@@ -44,5 +47,17 @@ class LoginController extends Controller
             return redirect()->intended('/admin');
         }
         return redirect()->intended('/');
+    }
+
+    public  function  login_modal_users(Request $request)
+    {
+
+        $this->validate($request, ['email' => 'required|email', 'password' => 'required']);
+        $user = $request->all();
+        if(Auth::attempt($user)){
+            return redirect('/');
+        }else{
+            return response()->json(['error'=>'Wrong Email or password combination.']);
+        }
     }
 }

@@ -1,3 +1,5 @@
+@include('partials.login_modal')
+
 <nav class="navbar navbar-inverse navbar-static-top">
     <div class="container">
         <div class="navbar-header">
@@ -42,7 +44,8 @@
                 </li>
                 <!-- Authentication Links -->
                 @guest
-                    <li><a href="{{ route('login') }}">Login</a></li>
+                    {{--<li><a href="{{ route('login') }}">Login</a></li>--}}
+                <li><a href="javascript:void(0)" data-toggle="modal" data-target="#loginModal">Login</a></li>
                     <li><a href="{{ route('register') }}">Register</a></li>
                     @else
                         <li class="dropdown">
