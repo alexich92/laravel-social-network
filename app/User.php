@@ -45,7 +45,7 @@ class User extends Authenticatable
     static public function getUsername($name) {
         $username = str_slug($name);
         $count  = User::whereRaw("username REGEXP '^{$username}(-[0-9]*)?$'")->count();
-        return $count ? "{$username}{$count}" : $username;
+        return $count ? "{$username}-{$count}" : $username;
     }
 
     public function likes()

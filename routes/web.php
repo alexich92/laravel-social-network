@@ -69,6 +69,7 @@ Route::middleware('auth')->group(function () {
     Route::post('/post/reports','PostReportsController@store')->name('reports.store');
 });
 Route::post('/user/login','Auth\LoginController@login_modal_users')->name('user.login');
+Route::post('/signup','Auth\RegisterController@register_user')->name('user.register');
 Route::get('/{section_slug}','AdminSectionsController@showSectionPosts')->name('section.posts');
 
 

@@ -28,6 +28,8 @@
 
     <!-- Scripts -->
     <script src="{{ asset('js/app.js') }}"></script>
+    <script src="{{ asset('js/register.js') }}"></script>
+    <script src="{{ asset('js/login.js') }}"></script>
     <script src="https://cdn.jsdelivr.net/npm/noty@3.1.2/lib/noty.min.js"></script>
 
     <script>
@@ -41,52 +43,6 @@
         @endif
     </script>
 
-    <!-- log in the user -->
-    <script>
-        $('.login').on('click',function(){
-            $('#loginForm').submit(function(e){
-                e.preventDefault();
-                var email = $("#email").val();
-                var password = $("#password").val();
-                $.ajaxSetup({
-                    headers: {
-                        'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-                    }
-                });
-
-                $.ajax({
-                    method: 'POST',
-                    url: '/user/login',
-                    dataType: "json",
-                    data: { email: email, password: password }
-                }).done(function(response) {
-                    $("#email").val('');
-                    $("#password").val('');
-                    $('.wth').text(response.error);
-                }).fail(function() {
-                    localStorage.setItem("noty","notificare");
-                    location.reload();
-                })
-            })
-        })
-    </script>
-
-    <script>
-        //display notifications after the user is logged
-        $(document).ready(function(){
-            //get it if noty key found
-            if(localStorage.getItem("noty"))
-            {
-                new Noty({
-                    type:'success',
-                    layout:'bottomRight',
-                    timeout:2000,
-                    text:'Awww yeaa!Welcome back!'
-                }).show()
-                localStorage.clear();
-            }
-        });
-    </script>
     @yield('js')
 
 </body>
