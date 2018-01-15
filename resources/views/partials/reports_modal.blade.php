@@ -64,7 +64,7 @@
         <!-- Modal content-->
         <div class="modal-content">
             <div class="modal-body">
-                <a class="btn-close pull-right" href="javascript:void(0);" data-dismiss="modal"
+                <a class="btn-close pull-right" href="#" data-dismiss="modal"
                 style="text-decoration: none;width: 24px;">✖</a>
                 <div class="header">
                     <h1>Report</h1>
@@ -74,7 +74,7 @@
                     <ul class="picker">
                         @foreach($reports as $report)
                             <li class="">
-                                <a href="javascript:void(0);" class="" data-report-id="{{$report->id}}">
+                                <a href="#" class="" data-report-id="{{$report->id}}">
                                     <div class="text"><h3><strong>{{$report->name}}</strong></h3></div>
                                     <div class="badge-report-selector pull-right"></div>
                                 </a>
@@ -100,7 +100,7 @@
 
             <div class="modal-footer">
                 <button type="button" id='close'class="btn btn-default" data-dismiss="modal">Close</button>
-                <button type="button" id="next" class="btn btn-primary disabled" >Next</button>
+                <button type="button" id="next" class="btn btn-primary" disabled>Next</button>
                 <button type="button" id='prev' class="btn btn-default hidden">Prev</button>
                 <button type="submit" id="report" class="btn btn-danger hidden" >Report</button>
             </div>
