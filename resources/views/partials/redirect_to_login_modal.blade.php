@@ -11,8 +11,8 @@
                 </p>
             </div>
             <div class="modal-footer">
-                <h5 class="pull-left" style="padding-right: 36%">Sign up with your <a href="{{route('register')}}"><strong>Email address</strong></a></h5>
-                <h5 class="pull-left">Have an account? <a href="{{route('login')}}"><strong>Login</strong></a></h5>
+                <h5 class="pull-left" style="padding-right: 36%">Sign up with your <a  href="#" data-toggle="modal" data-target="#registerModal"><strong>Email address</strong></a></h5>
+                <h5 class="pull-left">Have an account? <a  href="#" data-toggle="modal" data-target="#loginModal"><strong>Login</strong></a></h5>
             </div>
         </div>
 

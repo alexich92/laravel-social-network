@@ -7,7 +7,7 @@ use App\Post;
 use Session;
 use Auth;
 use App\Like;
-use App\Comment;
+use Validator;
 
 class PostsController extends Controller
 {
@@ -31,16 +31,87 @@ class PostsController extends Controller
         //
     }
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
+
+    // validate the image from upload post form
+    public function validate_image(Request $request)
+    {
+        $validator = Validator::make($request->all(), [
+            'image' => 'required|mimes:jpeg,bmp,png,gif',
+        ]);
+
+        if ($validator->passes())
+        {
+            return response()->json(['success' => 'Image ok']);
+
+        }else{
+            return response()->json(['error' => $validator->errors()->all()]);
+        }
+    }
+
+
+    //validate the input title from the uploaded post form
+    public function validate_title(Request $request)
+    {
+        $validator = Validator::make($request->all(), [
+            'title' => 'required|min:6',
+        ]);
+
+        if ($validator->passes())
+        {
+            return response()->json(['success' => 'Title ok']);
+
+        }else{
+            return response()->json(['error' => $validator->errors()->all()]);
+        }
+    }
+
+
+    // store a new post
     public function store(Request $request)
     {
-        //
+        $validator = Validator::make($request->all(), [
+            'image' => 'required|mimes:jpeg,bmp,png,gif',
+            'title' =>'required|min:6'
+        ]);
+
+
+        if ($validator->passes())
+        {
+            $input = $request->all();
+
+            if($file  = $request->file('image'))
+            {
+
+                $filename = time().$file->getClientOriginalName();
+                $file->move('images/posts',$filename);
+                $input['image'] = $filename;
+            }
+
+            $input['slug'] =Post::makeSlugFromTitle($request->title);
+            $post =  auth()->user()->posts()->create($input);
+            $post->sections()->attach([3,$request->section]);
+
+            return response()->json(['success' => 'OK']);
+
+        }else{
+            return response()->json(['error' => 'Something went wrong!Try again.']);
+        }
+
+
     }
+
+
+
+
+
+
+
+
+
+
+
+
+
 
     /**
      * Display the specified resource.

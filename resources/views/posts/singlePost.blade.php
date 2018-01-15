@@ -263,6 +263,7 @@
             $(this).parent().children().children().addClass('selected');
             $('#next').removeClass('disabled');
             var reportId = $(this).attr("data-report-id");
+            console.log(reportId);
 
             $.ajaxSetup({
                 headers: {

@@ -3,60 +3,115 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Post;
 use Session;
+use Auth;
+use App\Post;
 use App\Section;
+
 
 class AdminPostsController extends Controller
 {
+    /**
+     * Display a listing of the resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
     public function index()
     {
-        return view('admin.posts.index')->with('posts',Post::latest()->paginate(20));
-    }
+        return view('admin.posts.index')->with('posts', Post::paginate(20));
 
+    }
+    /**
+     * Show the form for creating a new resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
     public function create()
     {
-        return view('admin.posts.create')->with('sections',Section::all());
+        return view('admin.posts.create') ->with('sections',Section::all());;
     }
 
-    public function store()
-    {
-        request()->validate([
-            'title'=>'required',
-            'image'=>'required|mimes:jpeg,bmp,png,gif',
-            'sections'=>'required'
-        ]);
 
-        $input = request()->all();
-        //check to see if the request has a file
-        if($file  = request()->file('image'))
+
+
+    /**
+     * Store a newly created resource in storage.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @return \Illuminate\Http\Response
+     */
+    public function store(Request $request)
+    {
+       $this->validate($request,[
+           'title'       =>'required',
+           'image'       =>'required|mimes:jpeg,bmp,png,gif',
+           'sections'    =>'required'
+       ]);
+        $input = $request->all();
+
+        if($file  = $request->file('image'))
         {
-            //append the filename a timestamp
+
             $filename = time().$file->getClientOriginalName();
             $file->move('images/posts',$filename);
             $input['image'] = $filename;
         }
-        //make a unique slug from title
-        $input['slug'] =Post::makeSlugFromTitle(request()->title);
-        //create the post
-        $post = auth()->user()->posts()->create($input);
-        //attach the sections
-        $post->sections()->attach(request()->sections);
 
-        Session::flash('success','Post created!');
+        $input['slug'] =Post::makeSlugFromTitle($request->title);
+        $post =  auth()->user()->posts()->create($input);
+        $post->sections()->attach($request->sections);
 
-        return back();
+        Session::flash('success','Post created successfully');
+        return redirect()->route('posts.index');
+
 
     }
 
+
+
+    public function showSinglePost($slug)
+    {
+        $post = Post::where('slug',$slug)->first();
+        $next_id = Post::where('id','<',$post->id)->max('id');
+        return view('post')->with('post',$post)
+                           ->with('next',Post::find($next_id));
+    }
+
+    /**
+     * Show the form for editing the specified resource.
+     *
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function edit($id)
+    {
+        //
+    }
+
+    /**
+     * Update the specified resource in storage.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function update(Request $request, $id)
+    {
+        //
+    }
+
+    /**
+     * Remove the specified resource from storage.
+     *
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
     public function destroy($id)
     {
         $post=Post::find($id);
-        unlink(public_path('/images/posts/' . $post->image));
+        unlink(public_path('images/posts/' . $post->image));
         $post->delete();
         Session::flash('success','Post deleted!');
-        return redirect()->route('posts.index');
-
+        return redirect()->back();
     }
-
 }

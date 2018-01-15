@@ -46,11 +46,31 @@ class AdminSectionsController extends Controller
      */
     public function store(Request $request)
     {
+        $input = request()->all();
         $this->validate($request,[
             'name'=>'required|unique:sections',
-            'slug'=>str_slug($request->name)
+            'image'=>'required|image|mimes:jpeg,bmp,png,gif',
+            'description'=>'required'
         ]);
-        Section::create(request()->all());
+//        request()->validate([
+//            'name'=>'required|unique:sections',
+//            'slug'=>str_slug($request->name),
+//            'image'=>'required|mimes:jpeg,bmp,png,gif',
+//            'description'=>'required'
+//        ]);
+
+        //check to see if the request has a file
+        if($file  = request()->file('image'))
+        {
+            //append the filename a timestamp
+            $filename = time().$file->getClientOriginalName();
+            $file->move('images/sections',$filename);
+            $input['image'] = $filename;
+        }
+
+        $input['slug'] =str_slug($request->name);
+
+        Section::create($input);
         Session::flash('success','Section created!');
         return back();
     }
@@ -97,7 +117,9 @@ class AdminSectionsController extends Controller
      */
     public function destroy($id)
     {
-        Section::destroy($id);
+        $section=Section::find($id);
+        unlink(public_path('/images/sections/' . $section->image));
+        $section->delete();
         Session::flash('success','Section deleted');
         return redirect()->back();
     }

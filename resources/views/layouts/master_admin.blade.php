@@ -338,6 +338,13 @@
                 </li>
 
                 <li>
+                    <a class="" href="{{route('sections.index')}}">
+                        <i class="fa fa-flag" aria-hidden="true"></i>
+                        <span>Sections</span>
+                    </a>
+                </li>
+
+                <li>
                     <a class="" href="{{route('posts.reports')}}">
                         <i class="fa fa-flag" aria-hidden="true"></i>
                         <span>Reports</span>

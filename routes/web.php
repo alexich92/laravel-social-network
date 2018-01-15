@@ -63,10 +63,13 @@ Route::middleware('auth')->group(function () {
     Route::post('comment/reply','CommentRepliesController@createReply');
     Route::delete('/post/delete/{id}', 'PostsController@destroy')->name('post.delete');
     Route::post('/like','PostsController@likePost')->name('like');
+    Route::post('/upload/post','PostsController@store')->name('upload.post');
     Route::get('/random','UserSettingsController@random_image')->name('random');
     Route::post('/getpoints','PostsController@getpoints')->name('getpoints');
     Route::post('/report','AdminReportsController@getReport');
     Route::post('/post/reports','PostReportsController@store')->name('reports.store');
+    Route::post('/validate_image_post','PostsController@validate_image')->name('validate.image');
+    Route::post('/validate_title','PostsController@validate_title')->name('validate.title');
 });
 Route::post('/user/login','Auth\LoginController@login_modal_users')->name('user.login');
 Route::post('/signup','Auth\RegisterController@register_user')->name('user.register');

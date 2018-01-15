@@ -1,7 +1,8 @@
 @include('partials.login_modal')
 @include('partials.register_modal')
+@include('partials.upload')
 
-<nav class="navbar navbar-inverse navbar-static-top">
+<nav class="navbar navbar-inverse navbar-static-top" style="height: 35px">
     <div class="container">
         <div class="navbar-header">
 
@@ -46,7 +47,8 @@
                 <!-- Authentication Links -->
                 @guest
                 <li><a href="javascript:void(0)" data-toggle="modal" data-target="#loginModal">Login</a></li>
-                    <li><a href="javascript:void(0)" data-toggle="modal" data-target="#registerModal">Register</a></li>
+
+                    <a href="#" data-toggle="modal" data-target="#registerModal" style="margin-top: 7px;height: 35px;" class="btn btn-primary">Sign Up</a>
                     @else
                         <li class="dropdown">
                             <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
@@ -68,7 +70,9 @@
                                     </form>
                                 </li>
                             </ul>
+
                         </li>
+                        <a href="#" data-toggle="modal" data-target="#uploadModal" style="margin-top: 7px;height: 35px;" class="btn btn-primary">+ Upload</a>
                         @endguest
             </ul>
         </div>
