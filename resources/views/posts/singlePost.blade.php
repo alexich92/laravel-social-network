@@ -124,7 +124,7 @@
                         <img class="media-object" src="/images/avatars/{{$comment->avatar}}" width="50" alt="">
                     </a>
                     <div class="media-body">
-                        <h4 class="media-heading">{{$comment->author}}
+                        <h4 class="media-heading"><a href="{{route('overview' ,['username'=>$comment->author])}}">{{$comment->author}}</a>
                             <small>
                                 {{$comment->created_at->diffForHumans()}}
                             </small>
@@ -158,7 +158,7 @@
                                             <img  class="media-object" src="/images/avatars/{{$replay->image}}" width="35" alt="">
                                         </a>
                                         <div class="media-body">
-                                            <h4 class="media-heading">{{$replay->author}}
+                                            <h4 class="media-heading"><a href="{{route('overview' ,['username'=>$comment->author])}}">{{$comment->author}}</a>
                                                 <small>{{$replay->created_at->diffForHumans()}}</small>
                                             </h4>
                                             <p>{{$replay->body}}</p>
