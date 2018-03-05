@@ -15,6 +15,16 @@
     <!-- Fonts -->
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.css" rel="stylesheet" />
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/noty@3.1.2/lib/noty.css">
+    <link rel="stylesheet" href="{{ asset('css/upload_post_modal.css') }}">
+    <style>
+        .space{
+            background:  url("{{asset('storage/upload2.png')}}") 50% no-repeat;
+        }
+        .selected{
+            background-image:  url("{{asset('storage/ok2.png')}}");
+        }
+    </style>
+
     {{--<style>--}}
         {{--#see_all_notification_navbar{--}}
             {{--margin-top: 48% !important;--}}
