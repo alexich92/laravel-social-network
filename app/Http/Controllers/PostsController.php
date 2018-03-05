@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Notifications\RepliedToPost;
 use App\Post;
 use Session;
 use Auth;
@@ -191,6 +192,7 @@ class PostsController extends Controller
             }
         }else{
             $like = new Like();
+            $post->user->notify(new RepliedToPost($post,'upvote'));
         }
         $like->like = $is_like;
         $like->username = $user->username;
@@ -242,8 +244,8 @@ class PostsController extends Controller
     public function destroy($id)
     {
         $post=Post::find($id);
-        unlink(public_path('images/posts/' . $post->image));
         $post->delete();
+        unlink(public_path('images/posts/' . $post->image));
         Session::flash('success','Post deleted!');
         return redirect()->route('home');
     }

@@ -4,6 +4,7 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 
+
 class Post extends Model
 {
     protected $fillable=['user_id','slug','title','image'];
@@ -71,4 +72,5 @@ class Post extends Model
     {
         return $this->hasMany('App\PostReports');
     }
+
 }

@@ -59,7 +59,7 @@ Route::middleware('auth')->group(function () {
     //Route::get('/u/{user}','UserSettingsController@showPasswordView')->name('user.profile');
     Route::get('/member/delete/','UserSettingsController@showDeleteUserView')->name('member.delete');
     Route::delete('/member/delete/{id}','UserSettingsController@destroy')->name('user.destroy');
-    Route::post('/post/{post_id}/comment' ,'PostCommentsController@store')->name('comment.store');
+    Route::post('/post/{post}/comment' ,'PostCommentsController@store')->name('comment.store');
     Route::post('comment/reply','CommentRepliesController@createReply');
     Route::delete('/post/delete/{id}', 'PostsController@destroy')->name('post.delete');
     Route::post('/like','PostsController@likePost')->name('like');
@@ -70,6 +70,10 @@ Route::middleware('auth')->group(function () {
     Route::post('/post/reports','PostReportsController@store')->name('reports.store');
     Route::post('/validate_image_post','PostsController@validate_image')->name('validate.image');
     Route::post('/validate_title','PostsController@validate_title')->name('validate.title');
+    Route::get('/notifications','NotificationsController@index')->name('user.notifications');
+    Route::get('/markAsRead',function(){
+        auth()->user()->unreadNotifications->markAsRead();
+    });
 });
 Route::post('/user/login','Auth\LoginController@login_modal_users')->name('user.login');
 Route::post('/signup','Auth\RegisterController@register_user')->name('user.register');

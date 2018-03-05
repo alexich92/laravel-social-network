@@ -2,6 +2,8 @@
 @include('partials.register_modal')
 @include('partials.upload')
 
+
+
 <nav class="navbar navbar-inverse navbar-static-top" style="height: 35px">
     <div class="container">
         <div class="navbar-header">
@@ -20,6 +22,7 @@
             </a>
         </div>
 
+
         <div class="collapse navbar-collapse" id="app-navbar-collapse">
 
             <!-- Left Side Of Navbar -->
@@ -32,8 +35,9 @@
                  @endif
             </ul>
 
+
             <!-- Right Side Of Navbar -->
-            <ul class="nav navbar-nav navbar-right">
+            <ul class="nav navbar-nav navbar-right" style="margin-right: -8%;">
                 <li>
                     <form  action="/search" method="get" class="navbar-form">
                         <div class="input-group">
@@ -46,10 +50,14 @@
                 </li>
                 <!-- Authentication Links -->
                 @guest
-                <li><a href="javascript:void(0)" data-toggle="modal" data-target="#loginModal">Login</a></li>
+                <li><a href="#" data-toggle="modal" data-target="#loginModal">Login</a></li>
 
                     <a href="#" data-toggle="modal" data-target="#registerModal" style="margin-top: 7px;height: 35px;" class="btn btn-primary">Sign Up</a>
                     @else
+
+                    {{--Notification--}}
+                        <notification  :userid="{{auth()->id()}}" :unreads="{{auth()->user()->unreadNotifications}}"></notification>
+
                         <li class="dropdown">
                             <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
                                 <img src="{{asset('images/avatars/' . Auth::user()->avatar)}}" style="margin-left: -10px; margin-top: -6px ; padding-top: 1px"  height="32px" alt="">

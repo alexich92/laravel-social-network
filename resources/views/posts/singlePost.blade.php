@@ -30,7 +30,7 @@
     <!-- Blog Post Content Column -->
     <div class="col-md-8">
         <!-- Blog Post Title -->
-        <h3><b>{{$post->title}}</b></h3>
+        <h1><b>{{$post->title}}</b></h1>
 
         <a href="" class="points">{{$post->points}} {{str_plural('point',$post->points)}}</a> &middot
         <a href="#comments">{{count($post->comments)}} comments</a>
@@ -134,23 +134,26 @@
                         <div class="comment-replay-container">
                             <a class="toggle-replay btn btn-default" id="replybutt">Reply</a>
                             <div class="comment-replay ">
-                                {!! Form::open(['method'=>'Post','action'=>'CommentRepliesController@createReply','id'=>'form1']) !!}
+                                {!! Form::open(['method'=>'Post','action'=>'CommentRepliesController@createReply']) !!}
                                 <input type="hidden" name="comment_id" value="{{$comment->id}}">
                                 <div class="form-group">
                                     <div class="row">
                                         <div class="col-md-11">
-                                            {!! Form::textarea('body',null,['class'=>'form-control noresize','rows'=>2,'placeholder'=>'Write a reply']) !!}
+                                            {!! Form::textarea('body',null,['class'=>'form-control noresize','rows'=>1,'placeholder'=>'Write a reply']) !!}
                                         </div>
                                         <div class="col-md-1">
-                                            {!! Form::submit('Post',['class'=>'btn btn-primary pull-right','id'=>'postreplaybutt']) !!}
+                                            {!! Form::submit('Post',['class'=>'btn btn-primary pull-right']) !!}
                                         </div>
                                     </div>
                                 </div>
                                 {!! Form::close() !!}
                             </div>
 
+
                         @if(count($comment->replies)>0)
                             @foreach($comment->replies as $replay)
+                                    <a id="getReplies" href="#comments">View {{count(($comment->replies))}} replies.</a>
+                                    <div  class="reply hidden">
                                 <!-- Nested Comment -->
                                     <!-- Nested Comment -->
                                     <div id="nested-comment" class="media">
@@ -166,15 +169,15 @@
                                         <div class="comment-replay-container">
                                             <a class="toggle-replay btn btn-default" id="replybutt">Reply</a>
                                             <div class="comment-replay ">
-                                                {!! Form::open(['method'=>'Post','action'=>'CommentRepliesController@createReply','id'=>'form1']) !!}
+                                                {!! Form::open(['method'=>'Post','action'=>'CommentRepliesController@createReply']) !!}
                                                 <input type="hidden" name="comment_id" value="{{$comment->id}}">
                                                 <div class="form-group">
                                                     <div class="row">
                                                         <div class="col-md-11">
-                                                            {!! Form::textarea('body',null,['class'=>'form-control noresize','rows'=>2,'placeholder'=>'Write a reply']) !!}
+                                                            {!! Form::textarea('body',null,['class'=>'form-control noresize','rows'=>1,'placeholder'=>'Write a reply']) !!}
                                                         </div>
                                                         <div class="col-md-1">
-                                                            {!! Form::submit('Post',['class'=>'btn btn-primary pull-right','id'=>'postreplaybutt']) !!}
+                                                            {!! Form::submit('Post',['class'=>'btn btn-primary pull-right']) !!}
                                                         </div>
                                                     </div>
                                                 </div>
@@ -187,6 +190,7 @@
                         @endif
 
                         <!-- End Nested Comment -->
+                        </div>
                         </div>
 
                     </div>
@@ -229,10 +233,18 @@
 
     <!-- Show post reply textarea -->
     <script>
+
         $(".toggle-replay").click(function(){
             $('.comment-replay').hide()
             $(this).next().slideToggle("fast");
         });
+    </script>
+
+    <script>
+        $('#getReplies').click(function(){
+            $(this).hide();
+            $('.reply').removeClass('hidden');
+        })
     </script>
 
     <script src="{{asset('js/reports.js')}}"></script>

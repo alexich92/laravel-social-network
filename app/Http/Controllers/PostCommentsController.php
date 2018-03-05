@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Notifications\RepliedToPost;
 use Illuminate\Http\Request;
 use App\Comment;
 use Session;
@@ -35,19 +36,20 @@ class PostCommentsController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request,$post_id)
+    public function store(Request $request,Post $post)
     {
         $this->validate($request, [
             'body' => 'required|min:2'
         ]);
         $data = [
-            'post_id' =>$post_id,
+            'post_id' =>$post->id,
             'user_id' =>auth()->user()->id,
             'author'  =>auth()->user()->username,
             'body'    =>$request->body,
             'avatar'   =>auth()->user()->avatar
         ];
         Comment::create($data);
+        $post->user->notify(new RepliedToPost($post,'comment'));
         Session::flash('success','Comment posted!');
         return redirect()->back();
     }

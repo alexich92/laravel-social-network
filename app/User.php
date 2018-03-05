@@ -27,11 +27,17 @@ class User extends Authenticatable
         'password', 'remember_token','isAdmin'
     ];
 
+    //users can have many posts
     public function posts()
     {
         return $this->hasMany('App\Post');
     }
 
+//    user can have many notifications
+//    public function notifications()
+//    {
+////        return $this->morphTo();
+//    }
 
     //check to see if the user is an admin
     public function isAdmin()

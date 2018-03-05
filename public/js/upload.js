@@ -59,7 +59,7 @@ $(document).ready(function(){
                     $('#upload-image').addClass('hidden');
                     $('#title-step').removeClass('hidden');
                     $('.print-error-msg').removeClass('hidden');
-
+                    $('#next-to-sections').prop("disabled", true);
                     printErrorMsg(data.error);
                 }
             }

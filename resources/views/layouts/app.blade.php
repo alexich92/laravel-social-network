@@ -15,22 +15,34 @@
     <!-- Fonts -->
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.css" rel="stylesheet" />
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/noty@3.1.2/lib/noty.css">
+    {{--<style>--}}
+        {{--#see_all_notification_navbar{--}}
+            {{--margin-top: 48% !important;--}}
+        {{--}--}}
+    {{--</style>--}}
+    <script>
+        window.Laravel = {!! json_encode([
+            'csrfToken' =>csrf_token(),
+        ]) !!}
+    </script>
     @yield('css')
 
 </head>
 <body style="overflow-x: hidden;">
+<div id="app">
     @include('partials.nav')
     @yield('header')
-        <div class="container" style="padding-bottom: 300px">
-            @yield('content')
-        </div>
-
-
+    {{--<example></example>--}}
+    <div class="container" style="padding-bottom: 300px;">
+        @yield('content')
+    </div>
+</div>
     <!-- Scripts -->
     <script src="{{ asset('js/app.js') }}"></script>
     <script src="{{ asset('js/register.js') }}"></script>
     <script src="{{ asset('js/login.js') }}"></script>
     <script src="{{ asset('js/upload.js') }}"></script>
+    <script src="{{ asset('js/markasreadnotification.js') }}"></script>
     <script src="https://cdn.jsdelivr.net/npm/noty@3.1.2/lib/noty.min.js"></script>
 
     <script>
@@ -42,6 +54,12 @@
                 text:'{{Session::get('success')}}'
             }).show();
         @endif
+    </script>
+
+    <script>
+        function markNotificationAsRead() {
+            $.get('/markAsRead');
+        }
     </script>
 
     <script>
