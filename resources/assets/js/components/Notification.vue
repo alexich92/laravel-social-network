@@ -8,13 +8,13 @@
                 </span>
             </div>
         </a>
-        <ul class="dropdown-menu"  role="menu" style="width: 320px; height: 360px;">
+        <ul class="dropdown-menu"  role="menu">
             <div class="title">
-                <h5 id="activities" style="margin-top: 1px;margin-bottom: -15px;margin-left: 5px;"><strong>Activities</strong></h5>
+                <h5 id="activities"><strong>Activities</strong></h5>
             </div>
             <hr>
             <div class="notfication" style= "margin-top: -22px">
-                <li id="notification_scroll" style="height: 300px;  overflow-y:auto; padding-top: 22px">
+                <li id="notification_scroll">
                     <div v-if="unreadNotifications.length>0">
                         <notification-item v-for="unread in unreadNotifications"  :unread="unread" :key="unread.id"></notification-item>
                     </div>
@@ -77,5 +77,21 @@
     }
     #message h1{
         font-weight: 700;
+    }
+    .dropdown-menu{
+        width: 320px;
+        height: 360px;
+        margin-top: -5px;
+    }
+    #activities{
+        margin-top: 1px;
+        margin-bottom: -15px;
+        margin-left: 5px;
+    }
+
+    #notification_scroll{
+        height: 300px;
+        overflow-y:auto;
+        padding-top: 22px;
     }
 </style>

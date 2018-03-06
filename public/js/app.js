@@ -63823,7 +63823,7 @@ exports = module.exports = __webpack_require__(130)(undefined);
 
 
 // module
-exports.push([module.i, "\n.badge[data-v-583f2eda]{\n    margin-top:-68px;\n    margin-left: 12px;\n    background-color: red;\n}\n#bell[data-v-583f2eda]{\n    margin-bottom: -22px;\n}\n#message[data-v-583f2eda]{\n    margin-top: 100px;\n    margin-left: 15px;\n}\n#message h1[data-v-583f2eda]{\n    font-weight: 700;\n}\n", ""]);
+exports.push([module.i, "\n.badge[data-v-583f2eda]{\n    margin-top:-68px;\n    margin-left: 12px;\n    background-color: red;\n}\n#bell[data-v-583f2eda]{\n    margin-bottom: -22px;\n}\n#message[data-v-583f2eda]{\n    margin-top: 100px;\n    margin-left: 15px;\n}\n#message h1[data-v-583f2eda]{\n    font-weight: 700;\n}\n.dropdown-menu[data-v-583f2eda]{\n    width: 320px;\n    height: 360px;\n    margin-top: -5px;\n}\n#activities[data-v-583f2eda]{\n    margin-top: 1px;\n    margin-bottom: -15px;\n    margin-left: 5px;\n}\n#notification_scroll[data-v-583f2eda]{\n    height: 300px;\n    overflow-y:auto;\n    padding-top: 22px;\n}\n", ""]);
 
 // exports
 
@@ -64171,10 +64171,6 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
     staticClass: "badge"
   }, [_vm._v("\n                " + _vm._s(_vm.unreadNotifications.length) + "\n            ")])]) : _vm._e()]), _vm._v(" "), _c('ul', {
     staticClass: "dropdown-menu",
-    staticStyle: {
-      "width": "320px",
-      "height": "360px"
-    },
     attrs: {
       "role": "menu"
     }
@@ -64184,11 +64180,6 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
       "margin-top": "-22px"
     }
   }, [_c('li', {
-    staticStyle: {
-      "height": "300px",
-      "overflow-y": "auto",
-      "padding-top": "22px"
-    },
     attrs: {
       "id": "notification_scroll"
     }
@@ -64222,11 +64213,6 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
   return _c('div', {
     staticClass: "title"
   }, [_c('h5', {
-    staticStyle: {
-      "margin-top": "1px",
-      "margin-bottom": "-15px",
-      "margin-left": "5px"
-    },
     attrs: {
       "id": "activities"
     }

@@ -63,7 +63,7 @@
                                 <img src="{{asset('images/avatars/' . Auth::user()->avatar)}}" style="margin-left: -10px; margin-top: -6px ; padding-top: 1px"  height="32px" alt="">
                             </a>
 
-                            <ul class="dropdown-menu" role="menu">
+                            <ul class="dropdown-menu" role="menu" style="margin-top: -5px;margin-right: -1px;">
                                 <li><a href="{{route('overview',['username'=>Auth::user()->username])}}">My profile</a></li>
                                 <li><a href="{{route('user.account')}}">Settings</a></li>
                                 <li>
