@@ -7,7 +7,7 @@
 
                 <form id="uploadM" class="form-horizontal" method="POST" action="{{ route('user.register') }}" enctype="multipart/form-data">
                     <section id="upload-image">
-                    <div class="header">
+                    <div class="upload-header">
                         <h1>Upload</h1>
                         <p>Upload your post</p>
                     </div>
@@ -22,7 +22,7 @@
 
 
                     <section id="title-step" class="hidden">
-                        <div class="header">
+                        <div class="upload-header">
                             <h1>Give your post a title</h1>
                             <p>An accurate, descriptive title can help people discover your post.</p>
                         </div>
@@ -47,14 +47,11 @@
                             <button type="button" id="next-to-sections"  class="btn btn-primary" disabled>Next</button>
                         </div>
 
-                        
-                        
-
                     </section>
 
 
                     <section id="section-step" class="hidden">
-                        <div class="header">
+                        <div class="upload-header">
                             <h1>Pick a section</h1>
                             <p>Submitting to the right section to make sure your post gets the right exposure it deserves!</p>
                         </div>
@@ -86,16 +83,8 @@
                             <button type="button" id="submit-form" class="btn btn-primary disabled" >Next</button>
                         </div>
 
-
                     </section>
-
-
-
-
-
                 </form>
-
-
             </div>
         </div>
     </div>

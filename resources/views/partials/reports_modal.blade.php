@@ -8,7 +8,7 @@
             <div class="modal-body">
                 <a class="btn-close pull-right" href="#" data-dismiss="modal"
                 style="text-decoration: none;width: 24px;">✖</a>
-                <div class="header">
+                <div class="report-header">
                     <h1>Report</h1>
                     <p>Choosing the right reason help us process the report as soon as possible.</p>
                 </div>
@@ -17,7 +17,7 @@
                         @foreach($reports as $report)
                             <li class="">
                                 <a href="#" class="" data-report-id="{{$report->id}}">
-                                    <div class="text"><h3><strong>{{$report->name}}</strong></h3></div>
+                                    <div class="text"><h3 style="font-size: 16px;"><strong>{{$report->name}}</strong></h3></div>
                                     <div class="badge-report-selector pull-right"></div>
                                 </a>
                             </li>

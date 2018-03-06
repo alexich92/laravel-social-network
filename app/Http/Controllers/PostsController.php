@@ -91,6 +91,12 @@ class PostsController extends Controller
             $input['slug'] =Post::makeSlugFromTitle($request->title);
             $post =  auth()->user()->posts()->create($input);
             $post->sections()->attach([3,$request->section]);
+            Like::create([
+                'post_id'=>$post->id,
+                'user_id'=>$post->user_id,
+                'username'=>$post->user->username,
+                'like' =>1
+            ]);
 
             return response()->json(['success' => 'OK']);
 

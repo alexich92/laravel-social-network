@@ -8,7 +8,7 @@
 </div>
 
 <div class="navigation-1">
-    <ul>
+    <ul id="profile-nav">
         <li><a  href="{{route('overview',['username'=>$user->username])}}" class="{{ Request::is('*/overview') ? 'active' : '' }}">Overview</a></li>
         <li><a  href="{{route('posts',['username'=>$user->username])}}" class="{{ Request::is('*/posts') ? 'active' : '' }}">Posts</a></li>
         <li><a  href="{{route('upvotes',['username'=>$user->username])}}" class="{{ Request::is('*/likes') ? 'active' : '' }}">Upvotes</a></li>

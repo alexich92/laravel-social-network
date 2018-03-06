@@ -15,12 +15,9 @@ ul.picker li{
     /*height: 28px;*/
 /*}*/
 
-.header{
+.report-header{
     margin-left: 30px;
     margin-bottom: -7px
-}
-h3{
-    font-size: 16px;
 }
 
 ul.picker li:hover{

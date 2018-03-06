@@ -43,7 +43,6 @@
 <div id="app">
     @include('partials.nav')
     @yield('header')
-    {{--<example></example>--}}
     <div class="container" style="padding-bottom: 300px;">
         @yield('content')
     </div>
@@ -67,11 +66,11 @@
         @endif
     </script>
 
-    <script>
-        function markNotificationAsRead() {
-            $.get('/markAsRead');
-        }
-    </script>
+    {{--<script>--}}
+        {{--function markNotificationAsRead() {--}}
+            {{--$.get('/markAsRead');--}}
+        {{--}--}}
+    {{--</script>--}}
 
     <script>
         $(function(){
