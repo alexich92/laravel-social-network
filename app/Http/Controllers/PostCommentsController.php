@@ -49,7 +49,7 @@ class PostCommentsController extends Controller
             'avatar'   =>auth()->user()->avatar
         ];
         Comment::create($data);
-        $post->user->notify(new RepliedToPost($post,'comment'));
+        broadcast(new RepliedToPost($post,'comment'))->toOthers();
         Session::flash('success','Comment posted!');
         return redirect()->back();
     }

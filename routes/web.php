@@ -72,7 +72,7 @@ Route::middleware('auth')->group(function () {
     Route::post('/validate_title','PostsController@validate_title')->name('validate.title');
     Route::get('/notifications','NotificationsController@index')->name('user.notifications');
     Route::get('/markAsRead',function(){
-        auth()->user()->unreadNotifications->markAsRead();
+//        auth()->user()->unreadNotifications->markAsRead();
     });
 });
 Route::post('/user/login','Auth\LoginController@login_modal_users')->name('user.login');

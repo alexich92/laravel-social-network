@@ -22,6 +22,7 @@ class CommentRepliesController extends Controller
             'image'   =>auth()->user()->avatar
         ];
         CommentReply::create($data);
+//        $post->user->notify(new RepliedToPost($post,'comment'));
         return redirect()->back();
     }
 

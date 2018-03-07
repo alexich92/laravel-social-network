@@ -187,7 +187,7 @@ class PostsController extends Controller
             }
         }else{
             $like = new Like();
-            $post->user->notify(new RepliedToPost($post,'upvote'));
+            broadcast(new RepliedToPost($post,'upvote'))->toOthers();
         }
         $like->like = $is_like;
         $like->username = $user->username;

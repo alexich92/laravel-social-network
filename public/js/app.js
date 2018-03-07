@@ -63927,7 +63927,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 
         Echo.private('App.User.' + this.userid).notification(function (notification) {
             var newUnreadNotifications = { data: { post: notification.post, user: notification.user } };
-            _this.unreads.unshift(newUnreadNotifications);
+            _this.unreads.push(newUnreadNotifications);
         });
     }
 });
@@ -64065,8 +64065,8 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
     },
     mounted: function mounted() {
         this.postUrl = "post/" + this.unread.data.slug;
-        this.imageLink = 'images/posts/' + this.unread.data.post.image;
-        this.userPicture = 'images/avatars/' + this.unread.data.user.avatar;
+        this.imageLink = '/images/posts/' + this.unread.data.post.image;
+        this.userPicture = '/images/avatars/' + this.unread.data.user.avatar;
         this.typeNot = this.unread.data.type;
     },
 

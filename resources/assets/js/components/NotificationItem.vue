@@ -39,8 +39,8 @@
         },
         mounted(){
             this.postUrl = "post/" +this.unread.data.slug;
-            this.imageLink ='images/posts/' +this.unread.data.post.image;
-            this.userPicture ='images/avatars/' +this.unread.data.user.avatar;
+            this.imageLink ='/images/posts/' +this.unread.data.post.image;
+            this.userPicture ='/images/avatars/' +this.unread.data.user.avatar;
             this.typeNot = this.unread.data.type;
         },
        computed:{

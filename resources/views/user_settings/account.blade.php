@@ -25,7 +25,8 @@
 
             <div class="form-group has-feedback {{ $errors->has('email') ? 'has-error' : '' }}">
                 <label for="email">Email</label>
-                <input id="email" type="email" class="form-control" name="email" value="{{ Auth::user()->email }}">
+                {{--<input id="email" type="email" class="form-control" name="email" value="{{ Auth::user()->email }}">--}}
+                {{Form::email('email', $value = null, ['class'=>'form-control'])}}
 
                 <span class="glyphicon glyphicon-envelope form-control-feedback"></span>
                 @if ($errors->has('email'))
