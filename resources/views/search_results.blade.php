@@ -1,39 +1,7 @@
 @extends('layouts.app')
 
 @section('css')
-    <style>
-        a:hover {
-            color:blue;
-            text-decoration: none;
-        }
-        a:visited{
-            text-decoration: none;
-        }
-        a:link{
-            text-decoration: none;
-        }
-
-        /* Search box from search_results page */
-        .inner-addon {
-            border-radius: 0px;
-            position: relative;
-        }
-
-        /* style icon */
-        .inner-addon .glyphicon {
-            position: absolute;
-            padding: 10px;
-            pointer-events: none;
-        }
-
-        /* align icon */
-        .left-addon .glyphicon  { left:  0px;}
-        .right-addon .glyphicon { right: 0px;}
-
-        /* add padding  */
-        .left-addon input  { padding-left:  30px; }
-        .right-addon input { padding-right: 30px; }
-    </style>
+    <link rel="stylesheet" href="{{ asset('css/search_post_results.css') }}">
 @endsection
 
 @section('content')

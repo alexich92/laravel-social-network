@@ -106,20 +106,6 @@ class PostsController extends Controller
 
 
     }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
     /**
      * Display the specified resource.
      *
@@ -161,6 +147,9 @@ class PostsController extends Controller
 
     public function search_posts()
     {
+        if(empty(request('query'))){
+            return back();
+        }
         $posts = Post::where('title','like','%' . request('query') . '%')->get();
         return view('search_results')->with('posts',$posts);
     }
