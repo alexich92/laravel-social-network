@@ -63927,7 +63927,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 
         Echo.private('App.User.' + this.userid).notification(function (notification) {
             var newUnreadNotifications = { data: { post: notification.post, user: notification.user } };
-            _this.unreads.push(newUnreadNotifications);
+            _this.unreads.unshift(newUnreadNotifications);
         });
     }
 });
@@ -64011,7 +64011,7 @@ exports = module.exports = __webpack_require__(130)(undefined);
 
 
 // module
-exports.push([module.i, "\nimg[data-v-15b110c6]{\n    height: 40px;\n    width: 40px;\n    border: 0;\n}\na[data-v-15b110c6]{\n    text-decoration: none;\n}\n.wrap[data-v-15b110c6]:hover {\n    background-color: lightcyan;\n}\n#avatar[data-v-15b110c6]{\n    margin-left: 10px;\n    margin-top:10px;\n    border-radius:50%;\n    width: 40px;\n    height: 40px;\n}\n#content[data-v-15b110c6]{\n\n    min-height: 40px;\n    margin-left: 60px;\n    margin-right: 40px;\n    margin-top: -40px;\n}\n.message[data-v-15b110c6]{\n    line-height: 1.3em;\n}\n.timestamp[data-v-15b110c6]{\n    font-size: 11px;\n    color: #999;\n    line-height: 16px;\n    margin-top: 5px;\n    vertical-align: top;\n}\n#post[data-v-15b110c6]{\n    float:right;\n    margin-top: -60px;\n    margin-right: 5px;\n}\n\n\n\n", ""]);
+exports.push([module.i, "\nimg[data-v-15b110c6]{\n    height: 40px;\n    width: 40px;\n    border: 0;\n}\na[data-v-15b110c6]{\n    text-decoration: none;\n}\n.wrap[data-v-15b110c6]:hover {\n    background-color: lightcyan;\n}\n#avatar[data-v-15b110c6]{\n    margin-left: 10px;\n    margin-top:10px;\n    border-radius:50%;\n    width: 40px;\n    height: 40px;\n}\n#content[data-v-15b110c6]{\n\n    min-height: 40px;\n    margin-left: 60px;\n    margin-right: 40px;\n    margin-top: -40px;\n}\n.message[data-v-15b110c6]{\n    line-height: 1.3em;\n}\n.timestamp[data-v-15b110c6]{\n    font-size: 11px;\n    color: #999;\n    line-height: 16px;\n    margin-top: 5px;\n    vertical-align: top;\n}\n#post[data-v-15b110c6]{\n    float:right;\n    margin-top: -60px;\n    margin-right: 5px;\n}\n", ""]);
 
 // exports
 
@@ -64050,6 +64050,17 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 
 /* harmony default export */ __webpack_exports__["default"] = ({
@@ -64060,22 +64071,25 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
             postUrl: '',
             imageLink: '',
             userPicture: '',
-            typeNot: ""
+            typeNot: ''
         };
     },
     mounted: function mounted() {
+        this.typeNot = this.unread.type;
         this.postUrl = "post/" + this.unread.data.slug;
         this.imageLink = '/images/posts/' + this.unread.data.post.image;
         this.userPicture = '/images/avatars/' + this.unread.data.user.avatar;
-        this.typeNot = this.unread.data.type;
     },
 
+
     computed: {
-        typeOfNotfication: function typeOfNotfication() {
-            if (this.typeNot == 'comment') {
-                return true;
+        typeOfNotification: function typeOfNotification() {
+            if (this.typeNot === 'App\\Notifications\\RepliedToPost') {
+                return 1;
+            } else if (this.typeNot === 'App\\Notifications\\UpvotePost') {
+                return 2;
             } else {
-                return false;
+                return 0;
             }
         }
     }
@@ -64109,13 +64123,15 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
     attrs: {
       "id": "content"
     }
-  }, [(_vm.typeOfNotfication) ? _c('p', {
+  }, [(_vm.typeOfNotification === 1) ? [_c('p', {
     staticClass: "message"
-  }, [_vm._v(_vm._s(_vm.unread.data.user.name) + " commented on your post.")]) : _c('p', {
+  }, [_vm._v(_vm._s(_vm.unread.data.user.name) + " commented on your post.")])] : (_vm.typeOfNotification === 2) ? [_c('p', {
     staticClass: "message"
-  }, [_vm._v(_vm._s(_vm.unread.data.user.name) + " upvoted your post.")]), _vm._v(" "), _c('p', {
+  }, [_vm._v(_vm._s(_vm.unread.data.user.name) + " upvoted your post.")])] : [_c('p', {
+    staticClass: "message"
+  }, [_vm._v(_vm._s(_vm.unread.data.user.name) + " replayed to your comment.")])], _vm._v(" "), _c('p', {
     staticClass: "timestamp"
-  }, [_vm._v(_vm._s(_vm.moment(_vm.unread.created_at).fromNow()))])]), _vm._v(" "), _c('div', {
+  }, [_vm._v(_vm._s(_vm.moment(_vm.unread.created_at).fromNow()))])], 2), _vm._v(" "), _c('div', {
     attrs: {
       "id": "post-content"
     }

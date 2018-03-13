@@ -54,9 +54,10 @@
             Echo.private('App.User.' +this.userid)
                 .notification((notification) => {
                 let newUnreadNotifications = {data:{post:notification.post,user:notification.user}};
-                this.unreads.push(newUnreadNotifications);
+                this.unreads.unshift(newUnreadNotifications);
                 });
-        }
+        },
+
     }
 </script>
 

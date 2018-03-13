@@ -2,27 +2,36 @@
 
 namespace App\Http\Controllers;
 
+use App\Notifications\RepliedToComment;
 use Illuminate\Http\Request;
 use App\CommentReply;
 use App\Comment;
+use App\Post;
 use Session;
+
 
 class CommentRepliesController extends Controller
 {
     //create a reply
     public function createReply(Request $request)
     {
+
         $this->validate($request, [
             'body' => 'required|min:2'
         ]);
+        $post = Post::find(request()->post_id);
+
         $data = [
             'comment_id' =>$request->comment_id,
             'author'  =>auth()->user()->username,
             'body'    =>$request->body,
             'image'   =>auth()->user()->avatar
         ];
-        CommentReply::create($data);
-//        $post->user->notify(new RepliedToPost($post,'comment'));
+        $reply = CommentReply::create($data);
+        if(auth()->id() !== $reply->comment->user_id){
+            $reply->comment->user->notify(new RepliedToComment($post));
+        }
+
         return redirect()->back();
     }
 

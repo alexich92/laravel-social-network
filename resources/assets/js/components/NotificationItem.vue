@@ -6,10 +6,21 @@
            </div>
 
             <div id="content">
-                <!--<a :href="postUrl">-->
-                   <p class="message" v-if="typeOfNotfication">{{unread.data.user.name}} commented on your post.</p>
-                    <p class="message" v-else>{{unread.data.user.name}} upvoted your post.</p>
 
+
+                <template v-if="typeOfNotification === 1">
+                    <p class="message">{{unread.data.user.name}} commented on your post.</p>
+                </template>
+                <template v-else-if="typeOfNotification === 2">
+                    <p class="message">{{unread.data.user.name}} upvoted your post.</p>
+                </template>
+                <template v-else>
+                    <p class="message">{{unread.data.user.name}} replayed to your comment.</p>
+                </template>
+
+                    <!--<p class="message" v-else-if="typeOfNotification === 2">{{unread.data.user.name}} upvoted your post.</p>-->
+
+                <!--<p class="message">{{unread.data.user.name}} upvoted your post.</p>-->
                     <p class="timestamp">{{moment(unread.created_at).fromNow()}}</p>
 
             </div>
@@ -34,21 +45,24 @@
                 postUrl:'',
                 imageLink:'',
                 userPicture:'',
-                typeNot:""
+                typeNot:'',
             }
         },
         mounted(){
+            this.typeNot = this.unread.type;
             this.postUrl = "post/" +this.unread.data.slug;
             this.imageLink ='/images/posts/' +this.unread.data.post.image;
             this.userPicture ='/images/avatars/' +this.unread.data.user.avatar;
-            this.typeNot = this.unread.data.type;
         },
+
        computed:{
-            typeOfNotfication(){
-                if(this.typeNot =='comment'){
-                    return true;
-                }else {
-                    return false;
+            typeOfNotification(){
+                if(this.typeNot === 'App\\Notifications\\RepliedToPost'){
+                    return 1;
+                }else if(this.typeNot === 'App\\Notifications\\UpvotePost'){
+                    return 2;
+                }else{
+                    return 0;
                 }
             }
         }
@@ -101,7 +115,4 @@
         margin-top: -60px;
         margin-right: 5px;
     }
-
-
-
 </style>

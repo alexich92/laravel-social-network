@@ -2,17 +2,17 @@
 
 namespace App\Notifications;
 
-use Carbon\Carbon;
 use Illuminate\Bus\Queueable;
-use Illuminate\Notifications\Messages\BroadcastMessage;
 use Illuminate\Notifications\Notification;
+use Illuminate\Notifications\Messages\BroadcastMessage;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Notifications\Messages\MailMessage;
 
-class RepliedToPost extends Notification
+class UpvotePost extends Notification
 {
     use Queueable;
     public $post;
+
     /**
      * Create a new notification instance.
      *
@@ -34,6 +34,7 @@ class RepliedToPost extends Notification
         return ['database','broadcast'];
     }
 
+
     /**
      * Get the array representation of the notification.
      *
@@ -42,19 +43,13 @@ class RepliedToPost extends Notification
      */
     public function toDatabase($notifiable)
     {
-
         return [
             'post'=>$this->post,
             'user'=>auth()->user()
         ];
     }
 
-    /**
-     * Get the array representation of the notification.
-     *
-     * @param  mixed  $notifiable
-     * @return array
-     */
+
     public function toBroadcast($notifiable)
     {
 
@@ -63,6 +58,7 @@ class RepliedToPost extends Notification
             'user'=>auth()->user()
         ]);
     }
+
 
 
     /**

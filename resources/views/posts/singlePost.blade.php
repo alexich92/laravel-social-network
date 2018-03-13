@@ -28,6 +28,7 @@
     @include('partials.reports_modal')
 
     <!-- Blog Post Content Column -->
+    <div class="row">
     <div class="col-md-8">
         <!-- Blog Post Title -->
         <h1><b>{{$post->title}}</b></h1>
@@ -136,6 +137,7 @@
                             <div class="comment-replay ">
                                 {!! Form::open(['method'=>'Post','action'=>'CommentRepliesController@createReply']) !!}
                                 <input type="hidden" name="comment_id" value="{{$comment->id}}">
+                                <input type="hidden" name="post_id" value="{{$post->id}}">
                                 <div class="form-group">
                                     <div class="row">
                                         <div class="col-md-11">
@@ -152,8 +154,7 @@
 
                         @if(count($comment->replies)>0)
                             @foreach($comment->replies as $replay)
-                                    <a id="getReplies" href="#comments">View {{count(($comment->replies))}} replies.</a>
-                                    <div  class="reply hidden">
+                                    <div  class="reply">
                                 <!-- Nested Comment -->
                                     <!-- Nested Comment -->
                                     <div id="nested-comment" class="media">
@@ -161,29 +162,30 @@
                                             <img  class="media-object" src="/images/avatars/{{$replay->image}}" width="35" alt="">
                                         </a>
                                         <div class="media-body">
-                                            <h4 class="media-heading"><a href="{{route('overview' ,['username'=>$comment->author])}}">{{$comment->author}}</a>
+                                            <h4 class="media-heading"><a href="{{route('overview' ,['username'=>$replay->author])}}">{{$replay->author}}</a>
                                                 <small>{{$replay->created_at->diffForHumans()}}</small>
                                             </h4>
                                             <p>{{$replay->body}}</p>
                                         </div>
                                         <div class="comment-replay-container">
                                             <a class="toggle-replay btn btn-default" id="replybutt">Reply</a>
-                                            <div class="comment-replay ">
-                                                {!! Form::open(['method'=>'Post','action'=>'CommentRepliesController@createReply']) !!}
-                                                <input type="hidden" name="comment_id" value="{{$comment->id}}">
-                                                <div class="form-group">
-                                                    <div class="row">
-                                                        <div class="col-md-11">
-                                                            {!! Form::textarea('body',null,['class'=>'form-control noresize','rows'=>1,'placeholder'=>'Write a reply']) !!}
-                                                        </div>
-                                                        <div class="col-md-1">
-                                                            {!! Form::submit('Post',['class'=>'btn btn-primary pull-right']) !!}
+                                            <div class="comment-replay">
+                                                    {!! Form::open(['method'=>'Post','action'=>'CommentRepliesController@createReply']) !!}
+                                                    <input type="hidden" name="comment_id" value="{{$comment->id}}">
+                                                    <input type="hidden" name="post_id" value="{{$post->id}}">
+                                                    <div class="form-group">
+                                                        <div class="row">
+                                                            <div class="col-md-11">
+                                                                {!! Form::textarea('body',null,['class'=>'form-control noresize','rows'=>1,'placeholder'=>'Write a reply']) !!}
+                                                            </div>
+                                                            <div class="col-md-1">
+                                                                {!! Form::submit('Post',['class'=>'btn btn-primary pull-right']) !!}
+                                                            </div>
                                                         </div>
                                                     </div>
-                                                </div>
-                                                {!! Form::close() !!}
+                                                    {!! Form::close() !!}
                                             </div>
-
+                                            </div>
                                         </div>
                                     </div>
                             @endforeach
@@ -197,29 +199,14 @@
                     @endforeach
                     @endif
                 </div>
-
-                <div class="col-md-4" style="padding-top: 20px">
-
-                    {{--@foreach($random_posts as $random_post)--}}
-                        {{--<div class="row" style="padding-bottom: 10px">--}}
-                            {{--<div class="pull-right"><a  href="{{route('post.single',['slug'=>$post->slug])}}"  target="_blank"><img class="img-responsive size" style="height:127px" width="250px" src="/images/posts/{{$random_post->photo}}"></a></div>--}}
-                            {{--<div class="" style="margin-left: 36%">--}}
-                                {{--<a href="{{route('post.single',['slug'=>$post->slug])}}"  target="_blank" style="text-decoration: none">{{$random_post->title}}</a>--}}
-                            {{--</div>--}}
-                        {{--</div>--}}
-                    {{--@endforeach--}}
-                </div>
-
-
-    </div>
+            @include('random_posts')
+            </div>
 
 
 
     <div class="clearfix" style="padding-bottom: 200px">
 
     </div>
-
-
 
 @endsection
 
@@ -240,12 +227,12 @@
         });
     </script>
 
-    <script>
-        $('#getReplies').click(function(){
-            $(this).hide();
-            $('.reply').removeClass('hidden');
-        })
-    </script>
+    {{--<script>--}}
+        {{--$('#getReplies').click(function(){--}}
+            {{--$(this).hide();--}}
+            {{--$('.reply').removeClass('hidden');--}}
+        {{--})--}}
+    {{--</script>--}}
 
     <script src="{{asset('js/reports.js')}}"></script>
 

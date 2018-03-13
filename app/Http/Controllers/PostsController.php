@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Notifications\UpvotePost;
 use Illuminate\Http\Request;
 use App\Notifications\RepliedToPost;
 use App\Post;
@@ -187,7 +188,7 @@ class PostsController extends Controller
             }
         }else{
             $like = new Like();
-            broadcast(new RepliedToPost($post,'upvote'))->toOthers();
+
         }
         $like->like = $is_like;
         $like->username = $user->username;
@@ -210,6 +211,9 @@ class PostsController extends Controller
                 // if none of the buttons are pressed and we press the like button add a point
                 $post->points +=1;
                 $post->update();
+                if($post->user_id !== auth()->user()->id ){
+                    $post->user->notify(new UpvotePost($post));
+                }
             }else{
                 $like->save();
 

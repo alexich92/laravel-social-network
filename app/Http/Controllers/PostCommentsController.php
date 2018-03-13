@@ -49,7 +49,9 @@ class PostCommentsController extends Controller
             'avatar'   =>auth()->user()->avatar
         ];
         Comment::create($data);
-        broadcast(new RepliedToPost($post,'comment'))->toOthers();
+        if(auth()->id() !== $post->user_id){
+            $post->user->notify(new RepliedToPost($post));
+        }
         Session::flash('success','Comment posted!');
         return redirect()->back();
     }
