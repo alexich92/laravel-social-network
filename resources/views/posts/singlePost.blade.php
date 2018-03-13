@@ -20,6 +20,13 @@
         #postreplaybutt{
             height: 54px;
         }
+
+        .txt{
+            height: auto;
+            width: 89%;
+            margin-left: 70px;
+        }
+
     </style>
 @endsection
 
@@ -38,22 +45,11 @@
 
         <div class="media">
 
-
-            <div class="addthis_inline_share_toolbox_498c pull-right" style="margin-top: 34px"></div>
+            <div class="addthis_inline_share_toolbox_cqrk pull-right" style="margin-right: 240px;margin-top: 15px;" ></div>
             @if(Auth::check())
-            <div class="media" id="post_id" data-postid="{{$post->id}}">
-
-                <button type="button" class="btn btn-{{Auth::user()->likes()->where('post_id',$post->id)->first() ? Auth::user()->likes()->where('post_id',$post->id)->first()->like == 1 ? 'primary' :'default' :'default'}} btn-sm like">
-                    {{Auth::user()->likes()->where('post_id',$post->id)->first() ? Auth::user()->likes()->where('post_id',$post->id)->first()->like == 1 ? 'You like this post' :'Like' :'Like'}}
-                </button>
-                <button type="button"  class="btn btn-{{Auth::user()->likes()->where('post_id',$post->id)->first() ? Auth::user()->likes()->where('post_id',$post->id)->first()->like == 0 ? 'primary' :'default' :'default'}} btn-sm like">
-                    {{Auth::user()->likes()->where('post_id',$post->id)->first() ? Auth::user()->likes()->where('post_id',$post->id)->first()->like == 0 ? 'You don\'t like this post' :'Dislike' :'Dislike'}}
-                </button>
-            </div>
+                @include('partials.likes_buttons')
             @else
-                <div class="media" data-postid="{{$post->id}}">
-
-
+                <div class="media">
                     <button type="button" class="btn btn-default btn-sm" data-toggle="modal" data-target="#myModal">
                         Like
                     </button>
@@ -93,22 +89,26 @@
             @endif
 
         </div>
-        <p><b>{{count($post->comments)}} comments</b></p>
+        <p style="margin-top: -20px"><b>{{count($post->comments)}} comments</b></p>
 
         <hr>
         <!-- Blog Comments -->
 
         <!-- Comments Form -->
         @if(Auth::check())
-            <div class="well">
-                <h4>Leave a Comment:</h4>
-                {!! Form::open(['route'=>['comment.store',$post->id],'method'=>'Post']) !!}
+            <div class="row">
+            <div class="image-container col-md-1">
+                <img width="50px" src="/images/avatars/{{auth()->user()->avatar}}" alt="">
+            </div>
+        <div class="textarea-com">
+            {!! Form::open(['route'=>['comment.store',$post->id],'method'=>'Post']) !!}
                 <input type="hidden" name="post_id" value="{{$post->id}}">
-                <div class="form-group">
-                    {!! Form::textarea('body',null,['class'=>'form-control','rows'=>3,'placeholder'=>'Write comments...']) !!}
-                </div>
-                <button type="submit" class="btn btn-primary ">Submit</button>
-                {!! Form::close() !!}
+                    <div class="form-group">
+                        {!! Form::textarea('body',null,['class'=>'txt form-control','rows'=>3,'placeholder'=>'Write comments...']) !!}
+                    </div>
+                <button type="submit" style="margin-top: -60px;margin-right: 24px;" class="btn btn-primary pull-right">Post</button>
+            {!! Form::close() !!}
+        </div>
             </div>
         @else
             <h3 class="text-center">You need to <a href="{{route('login')}}">Log in</a> or <a href="{{route('register')}}">Sign up</a> to leave a comment.</h3>
@@ -118,18 +118,23 @@
 
         <!-- Posted Comments -->
         <!-- Comment -->
+
         @if(count($post->comments)>0)
+            <h5 style="font-weight: 900;">My comments</h5>
             @foreach($post->comments as $comment)
                 <div class="media" id="comments" >
                     <a class="pull-left" href="#">
                         <img class="media-object" src="/images/avatars/{{$comment->avatar}}" width="50" alt="">
                     </a>
                     <div class="media-body">
-                        <h4 class="media-heading"><a href="{{route('overview' ,['username'=>$comment->author])}}">{{$comment->author}}</a>
+                        <h5 class="media-heading"><a href="{{route('overview' ,['username'=>$comment->author])}}">{{$comment->author}}</a>
+                            @if($post->user_id=== $post->user->id && $comment->user_id ===$post->user->id)
+                                &nbsp;<span style="font-weight: 700;color: #00b22d;font-size: 11px;">OP</span> &middot;
+                            @endif
                             <small>
                                 {{$comment->created_at->diffForHumans()}}
                             </small>
-                        </h4>
+                        </h5>
                         <p>{{$comment->body}}</p>
 
                         <div class="comment-replay-container">
@@ -162,9 +167,12 @@
                                             <img  class="media-object" src="/images/avatars/{{$replay->image}}" width="35" alt="">
                                         </a>
                                         <div class="media-body">
-                                            <h4 class="media-heading"><a href="{{route('overview' ,['username'=>$replay->author])}}">{{$replay->author}}</a>
+                                            <h5 class="media-heading"><a href="{{route('overview' ,['username'=>$replay->author])}}">{{$replay->author}}</a>
+                                                @if($post->user_id=== $post->user->id && $replay->author ===$post->user->username)
+                                                    &nbsp;<span style="font-weight: 700;color: #00b22d;font-size: 11px;">OP</span> &middot;
+                                                @endif
                                                 <small>{{$replay->created_at->diffForHumans()}}</small>
-                                            </h4>
+                                            </h5>
                                             <p>{{$replay->body}}</p>
                                         </div>
                                         <div class="comment-replay-container">
@@ -197,10 +205,18 @@
 
                     </div>
                     @endforeach
-                    @endif
+                @else
+                <div class="well">
+                    <h4 style="text-align: center"> There are no comments</h4>
+                    <div id="wrapper" style="text-align: center">
+                        <button id="focusTextarea" type="submit" class="btn btn-primary ">Say something nice</button>
+                    </div>
                 </div>
+
+        @endif
+    </div>
             @include('random_posts')
-            </div>
+    </div>
 
 
 
@@ -220,11 +236,16 @@
 
     <!-- Show post reply textarea -->
     <script>
-
         $(".toggle-replay").click(function(){
             $('.comment-replay').hide()
             $(this).next().slideToggle("fast");
         });
+    </script>
+
+    <script>
+        $("#focusTextarea").click(function(){
+            $('.txt').focus();
+        })
     </script>
 
     {{--<script>--}}

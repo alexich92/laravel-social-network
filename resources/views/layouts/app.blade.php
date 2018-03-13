@@ -82,6 +82,6 @@
     </script>
 
     @yield('js')
-
+<script type="text/javascript" src="//s7.addthis.com/js/300/addthis_widget.js#pubid=ra-590b9610b2b33dbe"></script>
 </body>
 </html>
