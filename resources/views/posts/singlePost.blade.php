@@ -1,6 +1,7 @@
 @extends('layouts.app')
 
 @section('css')
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/lity/2.3.0/lity.min.css">
     <style>
         textarea{
             resize:none;
@@ -258,5 +259,6 @@
     <script src="{{asset('js/reports.js')}}"></script>
 
     <script src="{{asset('js/like.js')}}"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/lity/2.3.0/lity.min.js"></script>
 
 @endsection
