@@ -28,6 +28,7 @@
             margin-left: 70px;
         }
 
+
     </style>
 @endsection
 
@@ -168,6 +169,7 @@
                                             <img  class="media-object" src="/images/avatars/{{$replay->image}}" width="35" alt="">
                                         </a>
                                         <div class="media-body">
+                                            <span class="caret pull-right hidden"></span>
                                             <h5 class="media-heading"><a href="{{route('overview' ,['username'=>$replay->author])}}">{{$replay->author}}</a>
                                                 @if($post->user_id=== $post->user->id && $replay->author ===$post->user->username)
                                                     &nbsp;<span style="font-weight: 700;color: #00b22d;font-size: 11px;">OP</span> &middot;
@@ -176,6 +178,7 @@
                                             </h5>
                                             <p>{{$replay->body}}</p>
                                         </div>
+
                                         <div class="comment-replay-container">
                                             <a class="toggle-replay btn btn-default" id="replybutt">Reply</a>
                                             <div class="comment-replay">
@@ -248,6 +251,8 @@
             $('.txt').focus();
         })
     </script>
+
+
 
     {{--<script>--}}
         {{--$('#getReplies').click(function(){--}}

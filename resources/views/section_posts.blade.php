@@ -12,6 +12,7 @@
 
             <!-- First Blog Post -->
             @if(Auth::user())
+                {{--@if(count($section->posts)>0)--}}
                 @foreach($section->posts->reverse() as $post)
 
                     <h2>
@@ -32,6 +33,13 @@
                         @include('partials.likes_buttons')
                     <hr>
                 @endforeach
+                @if(count($section->posts)>0)
+                    <h3 class="text-center" style="color: darkgrey; padding-top: 14px; border: 2px solid dimgray; height: 60px " >No more posts!</h3>
+                @else
+                    <h3 class="text-center" style="color: darkgrey; padding-top: 14px; border: 2px solid dimgray; height: 60px " >There no posts in this section</h3>
+
+                @endif
+
 
             @else
 
@@ -69,9 +77,13 @@
 
                     <hr>
                 @endforeach
+                    @if(count($section->posts)>0)
+                        <h3 class="text-center" style="color: darkgrey; padding-top: 14px; border: 2px solid dimgray; height: 60px " >No more posts!</h3>
+                    @else
+                    <h3 class="text-center" style="color: darkgrey; padding-top: 14px; border: 2px solid dimgray; height: 60px " >There no posts in this section</h3>
+                    @endif
+                @endif
 
-
-            @endif
 
 
         </div>
