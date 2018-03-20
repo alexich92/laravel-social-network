@@ -160,8 +160,12 @@
 
 
                         @if(count($comment->replies)>0)
-                            @foreach($comment->replies as $replay)
-                                    <div  class="reply">
+                            <div class="row">
+                                <a  data-comment-id="{{$comment->id}}" id="getReplies" href="javascript:void(0)"><b style="margin-left: 20px;">View {{count($comment->replies)}} {{str_plural('reply',count($comment->replies))}}</b></a>
+                            </div>
+
+                                @foreach($comment->replies as $replay)
+                                    <div  class="reply-{{$comment->id}} hidden">
                                 <!-- Nested Comment -->
                                     <!-- Nested Comment -->
                                     <div id="nested-comment" class="media">
@@ -169,7 +173,6 @@
                                             <img  class="media-object" src="/images/avatars/{{$replay->image}}" width="35" alt="">
                                         </a>
                                         <div class="media-body">
-                                            <span class="caret pull-right hidden"></span>
                                             <h5 class="media-heading"><a href="{{route('overview' ,['username'=>$replay->author])}}">{{$replay->author}}</a>
                                                 @if($post->user_id=== $post->user->id && $replay->author ===$post->user->username)
                                                     &nbsp;<span style="font-weight: 700;color: #00b22d;font-size: 11px;">OP</span> &middot;
@@ -198,7 +201,7 @@
                                                     {!! Form::close() !!}
                                             </div>
                                             </div>
-                                        </div>
+                                    </div>
                                     </div>
                             @endforeach
                         @endif
@@ -256,12 +259,14 @@
 
 
 
-    {{--<script>--}}
-        {{--$('#getReplies').click(function(){--}}
-            {{--$(this).hide();--}}
-            {{--$('.reply').removeClass('hidden');--}}
-        {{--})--}}
-    {{--</script>--}}
+    <script>
+        $('a#getReplies').click(function(){
+            var commentId = $(this).attr("data-comment-id")
+            $(this).hide();
+            console.log(commentId);
+            $('.reply-'+ commentId ).removeClass('hidden');
+        })
+    </script>
 
     <script src="{{asset('js/reports.js')}}"></script>
 
