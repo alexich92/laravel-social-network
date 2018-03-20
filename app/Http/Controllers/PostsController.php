@@ -211,6 +211,7 @@ class PostsController extends Controller
                 // if none of the buttons are pressed and we press the like button add a point
                 $post->points +=1;
                 $post->update();
+                $this->checkpoints($post);
                 if($post->user_id !== auth()->user()->id ){
                     $post->user->notify(new UpvotePost($post));
                 }
@@ -226,6 +227,18 @@ class PostsController extends Controller
 
         }
         return null;
+    }
+
+    public function checkpoints($post)
+    {
+        if($post->points>=50 && $post->points<100){
+            $post->sections()->sync([2],false);
+        }elseif( $post->points>=100){
+            $post->sections()->sync([1]);
+        }else{
+            return;
+        }
+
     }
     
     public function getpoints(Request $request)

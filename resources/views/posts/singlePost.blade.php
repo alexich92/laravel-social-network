@@ -210,12 +210,14 @@
                     </div>
                     @endforeach
                 @else
-                <div class="well">
-                    <h4 style="text-align: center"> There are no comments</h4>
-                    <div id="wrapper" style="text-align: center">
-                        <button id="focusTextarea" type="submit" class="btn btn-primary ">Say something nice</button>
-                    </div>
-                </div>
+                    @if(Auth::check())
+                        <div class="well">
+                            <h4 style="text-align: center"> There are no comments</h4>
+                            <div id="wrapper" style="text-align: center">
+                                <button id="focusTextarea" type="submit" class="btn btn-primary ">Say something nice</button>
+                            </div>
+                        </div>
+                    @endif
 
         @endif
     </div>
