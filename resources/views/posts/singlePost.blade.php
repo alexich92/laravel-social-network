@@ -42,7 +42,7 @@
         <!-- Blog Post Title -->
         <h1><b>{{$post->title}}</b></h1>
 
-        <a href="" class="points">{{$post->points}} {{str_plural('point',$post->points)}}</a> &middot
+        <a href="" id="points-{{$post->id}}">{{$post->points}} {{str_plural('point',$post->points)}}</a> &middot
         <a href="#comments">{{count($post->comments)}} comments</a>
 
         <div class="media">

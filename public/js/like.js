@@ -45,9 +45,9 @@ $('.like').on('click', function (event) {
             data:{postId: postId},
             success:function(data){
                 if(data == 1){
-                    $(".points").text(data + ' point')
+                    $("#points-" +postId).text(data + ' point')
                 }else{
-                    $(".points").text(data + ' points')
+                    $("#points-" +postId).text(data + ' points')
                 }
 
             }
