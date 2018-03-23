@@ -4,6 +4,7 @@ namespace App\Providers;
 
 use App\Report;
 use Illuminate\Support\ServiceProvider;
+use Illuminate\Support\Facades\Validator;
 use App\Section;
 class AppServiceProvider extends ServiceProvider
 {

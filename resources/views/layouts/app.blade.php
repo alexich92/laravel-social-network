@@ -49,11 +49,16 @@
 </div>
     <!-- Scripts -->
     <script src="{{ asset('js/app.js') }}"></script>
+@if(!Auth::check())
     <script src="{{ asset('js/register.js') }}"></script>
+    <script src='https://www.google.com/recaptcha/api.js'></script>
     <script src="{{ asset('js/login.js') }}"></script>
+@endif
     <script src="{{ asset('js/upload.js') }}"></script>
     <script src="{{ asset('js/markasreadnotification.js') }}"></script>
     <script src="https://cdn.jsdelivr.net/npm/noty@3.1.2/lib/noty.min.js"></script>
+
+
 
     <script>
         @if(Session::has('success'))

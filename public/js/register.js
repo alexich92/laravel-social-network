@@ -8,7 +8,6 @@ $(document).ready(function(){
 
         $.ajaxSetup({
             headers: {
-                "name":name,
                 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
             }
         });
@@ -17,13 +16,20 @@ $(document).ready(function(){
             method: 'POST',
             url: '/signup',
             dataType: "json",
-            data: {_token:_token,name: name, email: email, password: password},
+            data: {
+                _token:_token,
+                name: name,
+                email: email,
+                password: password,
+                g_recaptcha_response: grecaptcha.getResponse()
+            },
             success:function(data){
                 if($.isEmptyObject(data.error)){
                     localStorage.setItem("not","notificare");
                     location.reload();
 
                 }else{
+                    grecaptcha.reset();
                     printErrorMsg(data.error);
                 }
             }

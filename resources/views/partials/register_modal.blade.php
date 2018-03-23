@@ -35,6 +35,7 @@
                         </div>
                     </div>
 
+                    <div style="margin: 20px 0px 0px 25px" class="g-recaptcha" data-sitekey="{{env('GOOGLE_RECAPTCHA_KEY')}}"></div>
                     <div class="print-error-msg" style="display:none">
                         <ul style="list-style-type: none; color: red;margin-left:-15px">></ul>
                     </div>
