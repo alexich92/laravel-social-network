@@ -1,0 +1,32 @@
+textarea{
+    resize:none;
+}
+
+.comment-replay {
+    display:none;
+}
+#replybutt{
+    border: none;
+    margin-left: -10px;
+    background-color:transparent;
+    box-shadow: none;
+    margin-top: -6px;
+}
+
+#postreplaybutt{
+    height: 54px;
+}
+
+.txt{
+    height: auto;
+    width: 89%;
+    margin-left: 70px;
+}
+
+a:active, a:focus {
+    outline: none !important;
+    border: none;
+    -moz-outline-style: none
+}
+
+

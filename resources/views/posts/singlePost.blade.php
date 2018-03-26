@@ -2,34 +2,7 @@
 
 @section('css')
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/lity/2.3.0/lity.min.css">
-    <style>
-        textarea{
-            resize:none;
-        }
-
-        .comment-replay {
-            display:none;
-        }
-        #replybutt{
-            border: none;
-            margin-left: -10px;
-            background-color:transparent;
-            box-shadow: none;
-            margin-top: -6px;
-        }
-
-        #postreplaybutt{
-            height: 54px;
-        }
-
-        .txt{
-            height: auto;
-            width: 89%;
-            margin-left: 70px;
-        }
-
-
-    </style>
+    <link rel="stylesheet" href="{{ asset('css/single_post.css') }}">
 @endsection
 
 @section('content')
@@ -140,7 +113,12 @@
                         <p>{{$comment->body}}</p>
 
                         <div class="comment-replay-container">
-                            <a class="toggle-replay btn btn-default" id="replybutt">Reply</a>
+                            @if(!Auth::check())
+                                <a  class="btn btn-default" href="#" data-toggle="modal" id="replybutt" data-target="#loginModal">Reply</a>
+                            @else
+                                <a class="toggle-replay btn btn-default" id="replybutt">Reply</a>
+                            @endif
+
                             <div class="comment-replay ">
                                 {!! Form::open(['method'=>'Post','action'=>'CommentRepliesController@createReply']) !!}
                                 <input type="hidden" name="comment_id" value="{{$comment->id}}">
@@ -183,7 +161,11 @@
                                         </div>
 
                                         <div class="comment-replay-container">
-                                            <a class="toggle-replay btn btn-default" id="replybutt">Reply</a>
+                                            @if(!Auth::check())
+                                                <a  class="btn btn-default" href="#" data-toggle="modal" id="replybutt" data-target="#loginModal">Reply</a>
+                                            @else
+                                                <a class="toggle-replay btn btn-default" id="replybutt">Reply</a>
+                                            @endif
                                             <div class="comment-replay">
                                                     {!! Form::open(['method'=>'Post','action'=>'CommentRepliesController@createReply']) !!}
                                                     <input type="hidden" name="comment_id" value="{{$comment->id}}">
@@ -251,6 +233,7 @@
         });
     </script>
 
+    {{-- if there are none comments and click on the button say smt nice the textarea get focused--}}
     <script>
         $("#focusTextarea").click(function(){
             $('.txt').focus();
@@ -258,7 +241,7 @@
     </script>
 
 
-
+    {{--get the replies of each section--}}
     <script>
         $('a#getReplies').click(function(){
             var commentId = $(this).attr("data-comment-id")
@@ -269,7 +252,6 @@
     </script>
 
     <script src="{{asset('js/reports.js')}}"></script>
-
     <script src="{{asset('js/like.js')}}"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/lity/2.3.0/lity.min.js"></script>
 
