@@ -6,6 +6,8 @@ use App\Notifications\UpvotePost;
 use Illuminate\Http\Request;
 use App\Notifications\RepliedToPost;
 use App\Post;
+
+use Intervention\Image\Facades\Image;
 use Session;
 use Auth;
 use App\Like;
@@ -83,10 +85,14 @@ class PostsController extends Controller
 
             if($file  = $request->file('image'))
             {
-
-                $filename = time().$file->getClientOriginalName();
-                $file->move('images/posts',$filename);
+                $image = $request->file('image');
+                $filename = time().$image->getClientOriginalName();
+                $location = public_path('images/posts/preview/' .$filename);
+                Image::make($image)->save($location);
+                $input['imagePreview'] = $filename;
+                $image->move('images/posts',$filename);
                 $input['image'] = $filename;
+
             }
 
             $input['slug'] =Post::makeSlugFromTitle($request->title);
@@ -258,6 +264,7 @@ class PostsController extends Controller
         $post=Post::find($id);
         $post->delete();
         unlink(public_path('images/posts/' . $post->image));
+        unlink(public_path('images/posts/preview/' . $post->imagePreview));
         Session::flash('success','Post deleted!');
         return redirect()->route('home');
     }

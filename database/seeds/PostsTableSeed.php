@@ -25,6 +25,7 @@ class PostsTableSeed extends Seeder
             'title' =>$title1,
             'slug' =>str_slug($title1),
             'image' =>'cat.jpg',
+            'imagePreview'=>'cat.jpg',
             'points'=>51
         ];
 
@@ -33,7 +34,8 @@ class PostsTableSeed extends Seeder
             'user_id' =>1,
             'title' =>$title2,
             'slug' =>str_slug($title2),
-            'image' =>'deadpool.png',
+            'image' =>'deadpool.jpg',
+            'imagePreview'=>'deadpool.jpg',
             'points'=>101
         ];
 
@@ -43,6 +45,7 @@ class PostsTableSeed extends Seeder
             'title' =>$title3,
             'slug' =>str_slug($title3),
             'image' =>'doggo.jpg',
+            'imagePreview'=>'doggo.jpg',
             'points'=>37
         ];
 
@@ -53,6 +56,7 @@ class PostsTableSeed extends Seeder
             'title' =>$title4,
             'slug' =>str_slug($title4),
             'image' =>'ham.jpg',
+            'imagePreview'=>'ham.jpg',
             'points'=>23
         ];
 
@@ -63,6 +67,7 @@ class PostsTableSeed extends Seeder
             'title' =>$title5,
             'slug' =>str_slug($title5),
             'image' =>'it.jpg',
+            'imagePreview'=>'it.jpg',
             'points'=>107
         ];
 
@@ -72,6 +77,7 @@ class PostsTableSeed extends Seeder
             'title' =>$title6,
             'slug' =>str_slug($title6),
             'image' =>'wonder.jpg',
+            'imagePreview'=>'wonder.jpg',
             'points'=>53
         ];
 

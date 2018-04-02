@@ -3,11 +3,13 @@
 namespace App;
 
 use Illuminate\Database\Eloquent\Model;
+use File;
+
 
 
 class Post extends Model
 {
-    protected $fillable=['user_id','slug','title','image'];
+    protected $fillable=['user_id','slug','title','image','imagePreview'];
 
     public static function boot()
     {
@@ -73,4 +75,13 @@ class Post extends Model
         return $this->hasMany('App\PostReports');
     }
 
+    // check to see if the image is gif
+
+    public function isGif($image)
+    {
+        if (File::extension($image) === 'gif') {
+            return true;
+
+        }
+    }
 }

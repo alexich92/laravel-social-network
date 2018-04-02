@@ -20,10 +20,15 @@
                     <a target="_blank" href="{{route('post.single',['slug'=>$post->slug])}}" style="text-decoration: none; color: black;font-size: 24px">{{ucfirst($post->title)}}</a>
                 </h2>
                 <div class="gifs">
-                    <a id="" target="_blank" href="{{route('post.single',['slug'=>$post->slug])}}">
-                        <img style="margin-bottom: 15px; border: 1px solid #c0c0c0; width: 650px" class="img-responsive"  src="/images/posts/{{$post->image}}" alt="">
-                    </a>
+                    @if($post->isGif($post->image))
+                        <img style="margin-bottom: 15px; border: 1px solid #c0c0c0; width: 650px" src="/images/posts/preview/{{$post->imagePreview}}"  class="gif img-responsive"   data-gif="/images/posts/{{$post->image}}"  alt="">
+                    @else
+                        <a id="" target="_blank" href="{{route('post.single',['slug'=>$post->slug])}}">
+                            <img style="margin-bottom: 15px; border: 1px solid #c0c0c0; width: 650px" class="img-responsive" src="/images/posts/{{$post->image}}" alt="">
+                        </a>
+                    @endif
                 </div>
+
 
                 <a target="_blank" class="points" style="margin-top: 20px; color: darkgrey" href="{{route('post.single',['slug'=>$post->slug])}}">{{$post->points}} points</a> &middot
 

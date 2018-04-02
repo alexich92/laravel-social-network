@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Section;
 use Session;
+use File;
 
 class AdminSectionsController extends Controller
 {

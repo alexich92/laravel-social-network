@@ -19,6 +19,7 @@ class CreatePostsTable extends Migration
             $table->string('title');
             $table->string('slug');
             $table->string('image');
+            $table->string('imagePreview');
             $table->integer('points')->default(1);
             $table->timestamps();
 

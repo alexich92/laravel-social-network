@@ -17,6 +17,7 @@
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/noty@3.1.2/lib/noty.css">
     <link rel="stylesheet" href="{{ asset('css/upload_post_modal.css') }}">
     <link rel="stylesheet" href="{{ asset('css/reports_modal.css') }}">
+    <link rel="stylesheet" href="{{ asset('css/gifplayer.css') }}">
     <style>
         .space{
             background:  url("{{asset('storage/upload2.png')}}") 50% no-repeat;
@@ -49,6 +50,11 @@
 </div>
     <!-- Scripts -->
     <script src="{{ asset('js/app.js') }}"></script>
+    <script src="{{asset('js/gifplayer.js')}}"></script>
+    {{--click to play/stop gifs--}}
+    <script>
+        $('.gif').gifplayer();
+    </script>
 @if(!Auth::check())
     <script src="{{ asset('js/register.js') }}"></script>
     <script src='https://www.google.com/recaptcha/api.js'></script>

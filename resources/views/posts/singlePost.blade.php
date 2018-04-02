@@ -46,8 +46,12 @@
 
 
         <!-- Preview Image -->
+        @if($post->isGif($post->image))
+            <img style="margin-bottom: 15px; border: 1px solid #c0c0c0; width: 650px" src="/images/posts/preview/{{$post->imagePreview}}"  class="gif img-responsive center-block"   data-gif="/images/posts/{{$post->image}}"  alt="">
+        @else
+            <img style="margin-bottom: 15px; border: 1px solid #c0c0c0; width: 650px" class="img-responsive center-block" src="/images/posts/{{$post->image}}" data-lity alt="">
+        @endif
 
-        <img style="margin-top: 10px" class="img-responsive center-block" src="/images/posts/{{$post->image}}" alt=""  data-lity>
 
         <hr>
         <div class="media">
@@ -97,11 +101,12 @@
         @if(count($post->comments)>0)
             <h5 style="font-weight: 900;">My comments</h5>
             @foreach($post->comments as $comment)
-                <div class="media" id="comments" >
+                <div class="media" id="comments">
                     <a class="pull-left" href="#">
                         <img class="media-object" src="/images/avatars/{{$comment->avatar}}" width="50" alt="">
                     </a>
                     <div class="media-body">
+
                         <h5 class="media-heading"><a href="{{route('overview' ,['username'=>$comment->author])}}">{{$comment->author}}</a>
                             @if($post->user_id=== $post->user->id && $comment->user_id ===$post->user->id)
                                 &nbsp;<span style="font-weight: 700;color: #00b22d;font-size: 11px;">OP</span> &middot;
@@ -111,6 +116,8 @@
                             </small>
                         </h5>
                         <p>{{$comment->body}}</p>
+
+
 
                         <div class="comment-replay-container">
                             @if(!Auth::check())
@@ -225,6 +232,7 @@
         });
     </script>
 
+
     <!-- Show post reply textarea -->
     <script>
         $(".toggle-replay").click(function(){
@@ -246,7 +254,6 @@
         $('a#getReplies').click(function(){
             var commentId = $(this).attr("data-comment-id")
             $(this).hide();
-            console.log(commentId);
             $('.reply-'+ commentId ).removeClass('hidden');
         })
     </script>
