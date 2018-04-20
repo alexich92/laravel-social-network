@@ -3,6 +3,7 @@
 @section('css')
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/lity/2.3.0/lity.min.css">
     <link rel="stylesheet" href="{{ asset('css/single_post.css') }}">
+    <title>{{$post->title}}</title>
 @endsection
 
 @section('content')

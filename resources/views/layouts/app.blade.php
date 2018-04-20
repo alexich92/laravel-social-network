@@ -8,9 +8,11 @@
     <!-- CSRF Token -->
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
-    <title>{{ config('app.name', '9GaG') }}</title>
 
+    {{--<title>{{ config('app.name', '9GaG') }}</title>--}}
     <!-- Styles -->
+    <link rel="icon" type="image/jpg" href="{{asset('storage/logo.jpg')}}">
+
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
     <!-- Fonts -->
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.css" rel="stylesheet" />
@@ -38,7 +40,7 @@
         ]) !!}
     </script>
     @yield('css')
-
+    <title>9GAG: GO FUN THE WORLD</title>
 </head>
 <body style="overflow-x: hidden;">
 <div id="app">

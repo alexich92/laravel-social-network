@@ -1,4 +1,7 @@
 @extends('layouts.app')
+@section('css')
+    <title>9GAG {{$section->name}}</title>
+@endsection
 @section('content')
     @include('partials.redirect_to_login_modal')
 
